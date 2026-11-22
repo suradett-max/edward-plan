@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Edward">
+    <meta name="theme-color" content="#07090e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f3f5f8" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAACZUlEQVR42u3bsQ2DQBBFwUsolobcLhY5hBbrx6z0Gvg36a017LbPfui/Wm8+AICHWHBDLLhBFtggKwbbYyiB2gMoA9voyqA2tjKojawMauMqg9qoyqA2pjKojagMauMphdpwyoA2mjKojaUUakMpA9pISqE2kDKgjaMUasMIaGkiaKMohdogAlqaCNoYSqE2hICWgJaAloAW0BLQ0ijQRhDQEtAS0BLQAloCWgJaAloC+nDXBzTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDfQU0L44AQ20gAZaQAMtoIEGGmgBDbSABlpAAw000EADDbSABlpAAy2ggQYaaKCBBlpAAy2ggRbQQAMNtD+FQAMNNNBAAw000EAD7YAGGmiggQYaaKCBBhpooIF2QAMNNNBAAw000EADDTTQQAMNNNBAAw000ED7sSKggRbQQAMNtIAGWkADLaCBFtBAAw20gAZaQAMtoIEGGmiggQZaQAMtoIEW0EADDTTQQPuC5QsW0EADDTTQQAPtgAYaaKCBBhpooIEGGmiggXZAAw000EADDTTQQAMNNNBAO6CBBhpooIEGGmiggQYa6LeAli9YEtAS0BLQEtACWgJaAloCWroDfZ4hBLQEtAS0BLSAloCWgJZ+CRpqpTADLaClyaChVgoz0AJamgwaaqUwA60caKiVwgy0cqChVgoz1MphBlo50FArhRlq5TBDrRxmqJXDDLVymKFWDjPUymGGWjnMYCsHGWolMYOtHGSwlYQMt5KI4dYTiL9zUg8krC/MMgAAAABJRU5ErkJggg==">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAACZUlEQVR42u3bsQ2DQBBFwUsolobcLhY5hBbrx6z0Gvg36a017LbPfui/Wm8+AICHWHBDLLhBFtggKwbbYyiB2gMoA9voyqA2tjKojawMauMqg9qoyqA2pjKojagMauMphdpwyoA2mjKojaUUakMpA9pISqE2kDKgjaMUasMIaGkiaKMohdogAlqaCNoYSqE2hICWgJaAloAW0BLQ0ijQRhDQEtAS0BLQAloCWgJaAloC+nDXBzTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDTTQQAMNNNBAAw000EADDfQU0L44AQ20gAZaQAMtoIEGGmgBDbSABlpAAw000EADDbSABlpAAy2ggQYaaKCBBlpAAy2ggRbQQAMNtD+FQAMNNNBAAw000EAD7YAGGmiggQYaaKCBBhpooIF2QAMNNNBAAw000EADDTTQQAMNNNBAAw000ED7sSKggRbQQAMNtIAGWkADLaCBFtBAAw20gAZaQAMtoIEGGmiggQZaQAMtoIEW0EADDTTQQPuC5QsW0EADDTTQQAPtgAYaaKCBBhpooIEGGmiggXZAAw000EADDTTQQAMNNNBAO6CBBhpooIEGGmiggQYa6LeAli9YEtAS0BLQEtACWgJaAloCWroDfZ4hBLQEtAS0BLSAloCWgJZ+CRpqpTADLaClyaChVgoz0AJamgwaaqUwA60caKiVwgy0cqChVgoz1MphBlo50FArhRlq5TBDrRxmqJXDDLVymKFWDjPUymGGWjnMYCsHGWolMYOtHGSwlYQMt5KI4dYTiL9zUg8krC/MMgAAAABJRU5ErkJggg==">
+    <title>Edward Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
+                        body: ['Sarabun', 'Prompt', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: {
+                            950: '#07090e',
+                            900: '#0d111a',
+                            850: '#131824',
+                            800: '#1a2130',
+                            700: '#273146',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-app: #f3f5f8;
+            --bg-surface: rgba(255, 255, 255, 0.94);
+            --bg-sub: #e9edf3;
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --ring-track: #dce3ec;
+            --accent-emerald: #059669;
+        }
+
+        html.dark {
+            --bg-app: #07090e;
+            --bg-surface: rgba(19, 24, 36, 0.90);
+            --bg-sub: #0d111a;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --ring-track: #1e2738;
+            --accent-emerald: #10b981;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        /* Standalone (Add to Home Screen) mode */
+        @media all and (display-mode: standalone) {
+            body { padding-top: env(safe-area-inset-top); }
+        }
+        @media all and (-webkit-min-device-pixel-ratio:0) and (display-mode: standalone) {
+            body { padding-top: env(safe-area-inset-top); }
+        }
+
+        body {
+            background-color: var(--bg-app);
+            color: var(--text-primary);
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            transition: background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
+            padding-bottom: calc(5.25rem + env(safe-area-inset-bottom));
+            overflow-x: hidden;
+            overscroll-behavior-y: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Splash screen */
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #07090e;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+        #splash-screen.fade-out { opacity: 0; pointer-events: none; }
+        #splash-screen .splash-icon {
+            width: 80px; height: 80px; border-radius: 20px;
+            background: #059669; display: flex; align-items: center; justify-content: center;
+            font-size: 42px; font-weight: 800; color: white; font-family: 'JetBrains Mono', monospace;
+            animation: splash-pulse 1.2s ease-in-out infinite;
+        }
+        #splash-screen .splash-text {
+            margin-top: 16px; color: #94a3b8; font-size: 14px; font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        @keyframes splash-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        .glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-subtle);
+            transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+        }
+
+        .sub-box {
+            background-color: var(--bg-sub);
+            border: 1px solid var(--border-subtle);
+            transition: background-color 0.35s ease, border-color 0.35s ease;
+        }
+
+        /* Staggered Entrance Animations */
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(14px) scale(0.985);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .reveal-item {
+            animation: cardReveal 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.03s; opacity: 0; }
+        .delay-2 { animation-delay: 0.07s; opacity: 0; }
+        .delay-3 { animation-delay: 0.11s; opacity: 0; }
+        .delay-4 { animation-delay: 0.15s; opacity: 0; }
+        .delay-5 { animation-delay: 0.19s; opacity: 0; }
+
+        /* Animated SVG Rings */
+        .ring-stroke {
+            transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Active Timer Pulse */
+        @keyframes emeraldPulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.42); }
+            70% { box-shadow: 0 0 0 16px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .timer-pulse {
+            animation: emeraldPulse 2s infinite;
+        }
+
+        /* Bottom Nav Pill Transition */
+        #nav-pill-slider {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-emerald-500 selection:text-white">
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-icon">E</div>
+        <div class="splash-text">Edward Plan</div>
+    </div>
+
+    <!-- Web Manifest (injected via JS for artifact compatibility) -->
+    <script>
+    (function() {
+        var manifest = {
+            name: 'Edward Plan',
+            short_name: 'Edward',
+            start_url: '.',
+            display: 'standalone',
+            background_color: '#07090e',
+            theme_color: '#07090e',
+            icons: [{
+                src: document.querySelector('link[rel=apple-touch-icon]').href,
+                sizes: '180x180',
+                type: 'image/png'
+            }]
+        };
+        var blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+        var link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = URL.createObjectURL(blob);
+        document.head.appendChild(link);
+    })();
+    </script>
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-30 glass-card border-x-0 border-t-0 px-4 py-3" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
+        <div class="max-w-2xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-bold text-sm sm:text-base tracking-tight">EDWARD PLANNER</h1>
+                        <span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-500 font-mono font-bold text-[10px]">PHASE 1</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="header-goal-line">82.4 → 76.8 kg (-5.6 kg)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <!-- Dark / Light Mode Toggle -->
+                <button onclick="toggleTheme()" id="theme-btn" aria-label="สลับธีมมืดและสว่าง" class="w-9 h-9 rounded-xl sub-box flex items-center justify-center hover:scale-105 active:scale-95 transition">
+                    <svg class="w-4 h-4 text-amber-400 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-slate-700 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    </svg>
+                </button>
+
+                <!-- Settings & Data Backup Modal Trigger -->
+                <button onclick="openSettingsModal()" aria-label="ตั้งค่าและสำรองข้อมูล" class="w-9 h-9 rounded-xl sub-box flex items-center justify-center hover:scale-105 active:scale-95 transition text-slate-600 dark:text-slate-300">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-2xl mx-auto px-4 pt-4 space-y-4">
+
+        <!-- ============================================================ -->
+        <!-- TAB 1: ตารางซ้อม & วงแหวนประจำวัน (WORKOUT & DAILY RINGS)     -->
+        <!-- ============================================================ -->
+        <section id="view-workout" class="space-y-4">
+
+            <!-- Goal Summary & Activity Rings Card -->
+            <div class="glass-card rounded-2xl p-4 space-y-4 reveal-item delay-1 shadow-sm">
+                <div class="flex items-center justify-between gap-2">
+                    <div>
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-emerald-500 block">เป้าหมายแรก • 10–12 สัปดาห์ (ถึงต้น ก.พ. 2027)</span>
+                        <h2 id="current-date-label" class="text-sm font-bold mt-0.5">วันจันทร์ 23 พ.ย. 2026</h2>
+                    </div>
+                    <div class="px-2.5 py-1 rounded-lg sub-box flex items-center gap-1.5 text-xs font-mono font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span id="current-weight-pill">82.4 kg</span>
+                    </div>
+                </div>
+
+                <!-- Two SVG Progress Rings: Steps & Water -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Steps Ring -->
+                    <div class="sub-box rounded-xl p-3.5 flex items-center gap-3.5">
+                        <div class="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-16 h-16" viewBox="0 0 64 64">
+                                <circle cx="32" cy="32" r="26" fill="none" stroke="var(--ring-track)" stroke-width="6"/>
+                                <circle id="ring-steps" class="ring-stroke" cx="32" cy="32" r="26" fill="none" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+                            </svg>
+                            <svg class="w-5 h-5 text-emerald-500 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400">ก้าวเดินวันนี้</span>
+                                <button onclick="openStepInputModal()" class="text-[11px] font-semibold text-emerald-500 hover:underline">กรอกเลข</button>
+                            </div>
+                            <p class="font-mono font-extrabold text-base sm:text-lg mt-0.5">
+                                <span id="steps-count-text">0</span> <span class="text-xs font-normal text-slate-400">/ <span id="steps-target-text">8,500</span></span>
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mt-2">
+                                <button onclick="addSteps(500)" class="px-2 py-1 rounded-md bg-emerald-500/12 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono font-bold text-[11px] active:scale-95 transition">+500</button>
+                                <button onclick="addSteps(1000)" class="px-2 py-1 rounded-md bg-emerald-500/12 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono font-bold text-[11px] active:scale-95 transition">+1,000</button>
+                                <button onclick="addSteps(4800)" title="เดินชัน 60 นาที" class="px-2 py-1 rounded-md bg-cyan-500/12 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-[11px] active:scale-95 transition">+4.8k ชัน</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Water Intake Ring -->
+                    <div class="sub-box rounded-xl p-3.5 flex items-center gap-3.5">
+                        <div class="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-16 h-16" viewBox="0 0 64 64">
+                                <circle cx="32" cy="32" r="26" fill="none" stroke="var(--ring-track)" stroke-width="6"/>
+                                <circle id="ring-water" class="ring-stroke" cx="32" cy="32" r="26" fill="none" stroke="#06b6d4" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+                            </svg>
+                            <svg class="w-5 h-5 text-cyan-500 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400">ดื่มน้ำสะอาด</span>
+                                <button onclick="resetWaterToday()" class="text-[11px] text-slate-400 hover:text-rose-500">รีเซ็ต</button>
+                            </div>
+                            <p class="font-mono font-extrabold text-base sm:text-lg mt-0.5">
+                                <span id="water-count-text">0.00</span> <span class="text-xs font-normal text-slate-400">/ 3.00 L</span>
+                            </p>
+                            <div class="flex gap-1.5 mt-2">
+                                <button onclick="addWater(250)" class="px-2 py-1 rounded-md bg-cyan-500/12 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-[11px] active:scale-95 transition">+250 ml</button>
+                                <button onclick="addWater(500)" class="px-2 py-1 rounded-md bg-cyan-500/12 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-[11px] active:scale-95 transition">+500 ml</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day Selector Pills (Mon - Sun) -->
+            <div class="flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar py-0.5 reveal-item delay-2" id="day-pills-bar"></div>
+
+            <!-- Daily Workout Session & Exercise List -->
+            <div id="session-exercises-wrapper" class="space-y-3 reveal-item delay-3"></div>
+
+            <!-- Weekly Volume Drawer -->
+            <div class="glass-card rounded-2xl overflow-hidden reveal-item delay-4">
+                <button onclick="toggleVolumeDrawer()" class="w-full p-4 flex items-center justify-between text-left hover:bg-emerald-500/5 transition">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-500 flex items-center justify-center">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm">สรุปปริมาณการฝึกรายสัปดาห์ (Weekly Volume)</h3>
+                            <p class="text-[11px] text-slate-400">เวท ~95 เซ็ต/สัปดาห์ • เดินชันรวม 200 นาที/สัปดาห์</p>
+                        </div>
+                    </div>
+                    <svg id="volume-chevron" class="w-4 h-4 text-slate-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div id="volume-drawer-body" class="hidden px-4 pb-4 pt-1 border-t border-slate-500/10 space-y-2 text-xs">
+                    <div class="grid grid-cols-2 gap-2 pt-2 font-body">
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หลัง (Lats / Mid Back)</span><strong class="font-mono text-emerald-500">16 เซ็ต</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>อก (Chest)</span><strong class="font-mono text-emerald-500">16 เซ็ต</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หน้าแขน (Biceps)</span><strong class="font-mono text-emerald-500">15 เซ็ต</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หลังแขน (Triceps)</span><strong class="font-mono text-emerald-500">8+ เซ็ต</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>ไหล่หน้า / ข้าง / หลัง</span><strong class="font-mono text-emerald-500">8 / 8 / 4</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>ขาหน้า / หลัง / ก้น</span><strong class="font-mono text-emerald-500">8 / 4 / 8</strong></div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 pt-1">
+                        กฎเหล็ก: น้ำหนักเหล็กเท่าเดิมห้ามลด (RPE 7–8/10) • หากพักครบเวลาแล้ว HR ยังค้างเกิน 130 bpm ให้ตัดท่าสุดท้ายออก
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 2: จับเวลาพัก & โค้ชเดินชัน (TIMERS & INCLINE COACH)       -->
+        <!-- ============================================================ -->
+        <section id="view-timer" class="hidden space-y-4">
+
+            <!-- Set Rest Timer Card -->
+            <div class="glass-card rounded-2xl p-5 text-center space-y-4 reveal-item delay-1">
+                <div class="flex items-center justify-between">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/12 text-emerald-500 text-xs font-bold">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M10 2h4"/></svg>
+                        จับเวลาพักระหว่างเซ็ต
+                    </span>
+                    <button onclick="toggleAudioAlert()" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg sub-box text-xs font-medium">
+                        <svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                        <span id="audio-state-label">เสียงเตือน: เปิด</span>
+                    </button>
+                </div>
+
+                <!-- Circular SVG Countdown -->
+                <div id="rest-circle-container" class="relative w-52 h-52 mx-auto flex items-center justify-center rounded-full">
+                    <svg class="w-52 h-52" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="88" fill="none" stroke="var(--ring-track)" stroke-width="10"/>
+                        <circle id="rest-ring-progress" class="ring-stroke" cx="100" cy="100" r="88" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="0"/>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span id="rest-mode-tag" class="text-[11px] font-bold text-amber-500 mb-1">Compound • HR ≤ 120 bpm</span>
+                        <div id="rest-clock-text" class="font-mono text-5xl font-extrabold tracking-tight">01:30</div>
+                        <span id="rest-hint-text" class="text-[11px] text-slate-400 mt-1">พร้อมเริ่มจับเวลา</span>
+                    </div>
+                </div>
+
+                <!-- 4 Presets: Compound 90s / 120s & Isolation 60s / 75s -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button onclick="startRestCountdown(90, 'Compound • HR ≤ 120 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
+                        <span class="block font-mono font-extrabold text-sm text-amber-500">90 วิ</span>
+                        <span class="block text-[10px] text-slate-400 mt-0.5">Compound (HR≤120)</span>
+                    </button>
+                    <button onclick="startRestCountdown(120, 'Compound หนัก • HR ≤ 120 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
+                        <span class="block font-mono font-extrabold text-sm text-amber-500">120 วิ</span>
+                        <span class="block text-[10px] text-slate-400 mt-0.5">Compound หนัก</span>
+                    </button>
+                    <button onclick="startRestCountdown(60, 'Isolation • HR ≤ 110 bpm')" class="p-2.5 rounded-xl sub-box hover:border-cyan-500/50 active:scale-95 transition text-center">
+                        <span class="block font-mono font-extrabold text-sm text-cyan-500">60 วิ</span>
+                        <span class="block text-[10px] text-slate-400 mt-0.5">Isolation (HR≤110)</span>
+                    </button>
+                    <button onclick="startRestCountdown(75, 'Isolation • HR ≤ 110 bpm')" class="p-2.5 rounded-xl sub-box hover:border-cyan-500/50 active:scale-95 transition text-center">
+                        <span class="block font-mono font-extrabold text-sm text-cyan-500">75 วิ</span>
+                        <span class="block text-[10px] text-slate-400 mt-0.5">Isolation 75 วิ</span>
+                    </button>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex gap-2.5 pt-1">
+                    <button onclick="toggleRestPause()" id="rest-action-btn" class="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 active:scale-98 transition flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>เริ่มจับเวลาพัก</span>
+                    </button>
+                    <button onclick="resetRestCountdown()" class="px-4 py-3 rounded-xl sub-box font-semibold text-sm hover:text-rose-500 transition">
+                        รีเซ็ต
+                    </button>
+                </div>
+            </div>
+
+            <!-- Incline Treadmill Coach Card -->
+            <div class="glass-card rounded-2xl p-5 space-y-4 reveal-item delay-2">
+                <div>
+                    <h3 class="font-bold text-base flex items-center gap-2">
+                        <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        โค้ชจับเวลาเดินชันบนลู่
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Apple Watch โหมด: เดินในร่ม • ปล่อยมือแกว่งแขนไม่จับราว</p>
+                </div>
+
+                <!-- Mode A (20m) vs Mode B (60m) -->
+                <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl sub-box">
+                    <button onclick="switchTreadmillMode(20)" id="tm-mode-20" class="py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">
+                        หลังเวท 20 นาที (จ/อ/พฤ/ศ)
+                    </button>
+                    <button onclick="switchTreadmillMode(60)" id="tm-mode-60" class="py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition">
+                        วันเดินชัน 60 นาที (พ/ส)
+                    </button>
+                </div>
+
+                <!-- Live Phase Display -->
+                <div class="sub-box rounded-2xl p-4 text-center space-y-3">
+                    <span id="tm-phase-badge" class="inline-block px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-500 text-xs font-bold">
+                        เดินชันต่อเนื่องหลังเวท
+                    </span>
+                    <div id="tm-timer-readout" class="font-mono text-4xl sm:text-5xl font-extrabold tracking-tight">
+                        00:00 <span class="text-base font-normal text-slate-400">/ 20:00</span>
+                    </div>
+
+                    <!-- Phase Progress Bar -->
+                    <div class="w-full h-2 rounded-full glass-card overflow-hidden">
+                        <div id="tm-phase-bar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-500" style="width: 0%"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div class="glass-card rounded-xl p-2.5">
+                            <span class="text-[11px] text-slate-400 block">ความชัน (Incline)</span>
+                            <span id="tm-incline-readout" class="font-mono text-xl font-extrabold text-amber-500">10%</span>
+                        </div>
+                        <div class="glass-card rounded-xl p-2.5">
+                            <span class="text-[11px] text-slate-400 block">ความเร็ว (Speed)</span>
+                            <span id="tm-speed-readout" class="font-mono text-xl font-extrabold text-cyan-500">4.0 km/h</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2.5 pt-1">
+                        <button onclick="toggleTreadmillRun()" id="tm-start-btn" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition">
+                            เริ่มเดินชัน
+                        </button>
+                        <button onclick="resetTreadmillRun()" class="px-4 py-2.5 rounded-xl glass-card font-semibold text-sm">
+                            รีเซ็ต
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Phase Schedule Breakdown -->
+                <div id="tm-phase-list" class="space-y-2 text-xs"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 3: อาหาร & กติกา (NUTRITION & DAILY RULES)               -->
+        <!-- ============================================================ -->
+        <section id="view-nutrition" class="hidden space-y-4">
+
+            <!-- Macro & Protein Tracker Card -->
+            <div class="glass-card rounded-2xl p-4 space-y-4 reveal-item delay-1">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="font-bold text-base">เป้าหมายโภชนาการ & โปรตีนวันนี้</h2>
+                        <p class="text-xs text-slate-400">พลังงานคงที่ ~1,800 kcal • โปรตีน 160g (แบ่ง 4 มื้อ)</p>
+                    </div>
+                    <span class="font-mono font-extrabold text-sm text-emerald-500" id="protein-summary-pill">0 / 160g</span>
+                </div>
+
+                <!-- Day Type Toggle -->
+                <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl sub-box">
+                    <button onclick="switchMacroDay('train')" id="macro-btn-train" class="py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">
+                        วันเวท (จ/อ/พฤ/ศ)
+                    </button>
+                    <button onclick="switchMacroDay('rest')" id="macro-btn-rest" class="py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition">
+                        วันพัก / เดินชัน (พ/ส/อา)
+                    </button>
+                </div>
+
+                <!-- Macro Boxes -->
+                <div class="grid grid-cols-4 gap-2 text-center font-mono">
+                    <div class="sub-box rounded-xl p-2.5">
+                        <span class="text-[11px] font-sans text-slate-400 block">พลังงาน</span>
+                        <span class="font-extrabold text-base block mt-0.5">1,800</span>
+                        <span class="text-[10px] text-slate-400">kcal</span>
+                    </div>
+                    <div class="sub-box rounded-xl p-2.5 border-emerald-500/40">
+                        <span class="text-[11px] font-sans text-emerald-500 font-semibold block">โปรตีน</span>
+                        <span class="font-extrabold text-base text-emerald-500 block mt-0.5">160g</span>
+                        <span class="text-[10px] text-slate-400">เป้าหมาย</span>
+                    </div>
+                    <div class="sub-box rounded-xl p-2.5">
+                        <span class="text-[11px] font-sans text-cyan-500 font-semibold block">คาร์บ</span>
+                        <span id="macro-carb-num" class="font-extrabold text-base text-cyan-500 block mt-0.5">170g</span>
+                        <span id="macro-carb-tag" class="text-[10px] text-slate-400">วันเวท</span>
+                    </div>
+                    <div class="sub-box rounded-xl p-2.5">
+                        <span class="text-[11px] font-sans text-amber-500 font-semibold block">ไขมัน</span>
+                        <span id="macro-fat-num" class="font-extrabold text-base text-amber-500 block mt-0.5">60g</span>
+                        <span id="macro-fat-tag" class="text-[10px] text-slate-400">สมดุล</span>
+                    </div>
+                </div>
+
+                <!-- Protein Progress Bar + Quick Add Buttons -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">โปรตีนสะสมวันนี้</span>
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono font-bold text-emerald-500" id="protein-percent-label">0%</span>
+                            <button onclick="resetProteinToday()" class="text-[11px] text-slate-400 hover:text-rose-500">รีเซ็ต</button>
+                        </div>
+                    </div>
+                    <div class="w-full h-2.5 rounded-full sub-box overflow-hidden">
+                        <div id="protein-progress-fill" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                        <button onclick="addProtein(45)" class="px-2.5 py-1.5 rounded-lg sub-box hover:border-emerald-500/50 text-xs font-medium active:scale-95 transition">
+                            <span class="font-mono font-bold text-emerald-500">+45g</span> เวย์ถั่ว 2 สกู๊ป
+                        </button>
+                        <button onclick="addProtein(33)" class="px-2.5 py-1.5 rounded-lg sub-box hover:border-emerald-500/50 text-xs font-medium active:scale-95 transition">
+                            <span class="font-mono font-bold text-emerald-500">+33g</span> โปรตีนขวด
+                        </button>
+                        <button onclick="addProtein(40)" class="px-2.5 py-1.5 rounded-lg sub-box hover:border-emerald-500/50 text-xs font-medium active:scale-95 transition">
+                            <span class="font-mono font-bold text-emerald-500">+40g</span> มื้อหลัก
+                        </button>
+                        <button onclick="openCustomProteinModal()" class="px-2.5 py-1.5 rounded-lg sub-box hover:border-cyan-500/50 text-xs font-semibold text-cyan-500 active:scale-95 transition">
+                            + ระบุเอง
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Life 4-Meal Routine Cards -->
+            <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item delay-2">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                        รูทีนอาหาร 4 มื้อตามชีวิตจริง
+                    </h3>
+                    <button onclick="resetMealsToday()" class="text-xs text-slate-400 hover:text-rose-500">ล้างติ๊กมื้อ</button>
+                </div>
+                <div id="meal-cards-container" class="space-y-2.5"></div>
+            </div>
+
+            <!-- Daily Non-Negotiable Rules Checklist -->
+            <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item delay-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        กติกาสำคัญประจำวัน
+                    </h3>
+                    <button onclick="resetRulesToday()" class="text-xs text-slate-400 hover:text-rose-500">รีเซ็ต</button>
+                </div>
+                <div id="daily-rules-container" class="space-y-2"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TAB 4: เช็กอิน 7 วัน & กราฟเป้าหมาย (WEEKLY CHECK-IN)         -->
+        <!-- ============================================================ -->
+        <section id="view-progress" class="hidden space-y-4">
+
+            <!-- 12-Week SVG Trajectory Chart -->
+            <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item delay-1">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="font-bold text-base">เส้นทางสู่เป้าแรก 76.8 kg</h2>
+                        <p class="text-xs text-slate-400">เริ่ม 82.4 kg (21/11/2026) → 76.8 kg (ต้น ก.พ. 2027)</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-500 font-mono font-bold text-xs">
+                        เหลือ <span id="kg-left-badge">5.6</span> kg
+                    </span>
+                </div>
+
+                <div class="sub-box rounded-xl p-3">
+                    <svg id="trajectory-svg" class="w-full h-44 overflow-visible" viewBox="0 0 360 145"></svg>
+                    <div class="flex items-center justify-center gap-5 text-[11px] text-slate-400 mt-2">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-3.5 border-t-2 border-dashed border-slate-400"></span> เส้นเป้าหมาย 12 วีค
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-3.5 h-1 rounded bg-emerald-500"></span> น้ำหนักจริงที่ชั่ง
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 4 Milestones -->
+                <div class="grid grid-cols-4 gap-1.5 text-center font-mono text-xs">
+                    <div class="sub-box rounded-lg p-2">
+                        <span class="text-[10px] font-sans text-slate-400 block">21/11/26</span>
+                        <span class="font-bold">82.4 kg</span>
+                    </div>
+                    <div class="sub-box rounded-lg p-2">
+                        <span class="text-[10px] font-sans text-slate-400 block">วีค 4 (19 ธ.ค.)</span>
+                        <span class="font-bold">80.0 kg</span>
+                    </div>
+                    <div class="sub-box rounded-lg p-2">
+                        <span class="text-[10px] font-sans text-slate-400 block">วีค 8 (16 ม.ค.)</span>
+                        <span class="font-bold">77.8 kg</span>
+                    </div>
+                    <div class="sub-box rounded-lg p-2 border-amber-500/40">
+                        <span class="text-[10px] font-sans text-amber-500 font-bold block">วีค 12 (เป้าแรก)</span>
+                        <span class="font-extrabold text-amber-500">76.8 kg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Weigh-In Form -->
+            <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item delay-2">
+                <div>
+                    <h3 class="font-bold text-base flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="m8 7 4-4 4 4"/><path d="m8 17 4 4 4-4"/></svg>
+                        บันทึกผลชั่งน้ำหนักทุก 7 วัน
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">ชั่งตอนเช้าหลังเข้าห้องน้ำ ระบบวิเคราะห์คำแนะนำให้อัตโนมัติ</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">วันที่ชั่ง</label>
+                        <input type="text" id="input-checkin-date" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">น้ำหนัก (kg)</label>
+                        <input type="number" step="0.05" id="input-checkin-weight" placeholder="81.90" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">ไขมัน (%)</label>
+                        <input type="number" step="0.1" id="input-checkin-fat" placeholder="20.5" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">กล้ามเนื้อ (kg)</label>
+                        <input type="number" step="0.05" id="input-checkin-muscle" placeholder="61.96" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <button onclick="saveWeighInEntry()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 active:scale-98 transition">
+                    บันทึกผลและวิเคราะห์แนวโน้ม
+                </button>
+
+                <!-- Coaching Feedback Box -->
+                <div id="coaching-feedback-box" class="hidden rounded-xl p-3 bg-emerald-500/12 border border-emerald-500/30 text-xs space-y-1"></div>
+
+                <!-- History List -->
+                <div id="weighin-history-container" class="space-y-2 pt-1"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 glass-card border-x-0 border-b-0" style="padding-bottom: env(safe-area-inset-bottom);">
+        <div class="max-w-2xl mx-auto relative">
+            <div id="nav-pill-slider" class="absolute top-0 left-0 w-1/4 h-0.5 bg-emerald-500"></div>
+            <div class="grid grid-cols-4 h-16">
+                <button onclick="switchMainTab('workout', 0)" id="tab-btn-0" class="flex flex-col items-center justify-center gap-1 text-emerald-500 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/></svg>
+                    <span class="text-[11px] font-semibold">ตารางซ้อม</span>
+                </button>
+                <button onclick="switchMainTab('timer', 1)" id="tab-btn-1" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M10 2h4"/></svg>
+                    <span class="text-[11px] font-semibold">จับเวลา</span>
+                </button>
+                <button onclick="switchMainTab('nutrition', 2)" id="tab-btn-2" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                    <span class="text-[11px] font-semibold">อาหาร & กติกา</span>
+                </button>
+                <button onclick="switchMainTab('progress', 3)" id="tab-btn-3" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span class="text-[11px] font-semibold">เช็กอิน 7 วัน</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Custom Step Input Modal -->
+    <div id="modal-steps" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-card rounded-2xl p-5 w-full max-w-sm space-y-4 reveal-item">
+            <h3 class="font-bold text-base">กรอกจำนวนก้าวเดินวันนี้</h3>
+            <p class="text-xs text-slate-400">ดูตัวเลขรวมจาก Apple Health หรือ Pedometer++ แล้วกรอกได้เลย</p>
+            <input type="number" id="field-custom-steps" placeholder="เช่น 8500" class="w-full px-3.5 py-2.5 rounded-xl sub-box font-mono text-lg font-bold focus:outline-none focus:border-emerald-500">
+            <div class="flex gap-2">
+                <button onclick="closeStepInputModal()" class="flex-1 py-2.5 rounded-xl sub-box text-sm font-semibold">ยกเลิก</button>
+                <button onclick="submitCustomSteps()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-bold">บันทึก</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Protein Input Modal -->
+    <div id="modal-protein" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-card rounded-2xl p-5 w-full max-w-sm space-y-4 reveal-item">
+            <h3 class="font-bold text-base">เพิ่มโปรตีน (กรัม)</h3>
+            <input type="number" id="field-custom-protein" placeholder="เช่น 35" class="w-full px-3.5 py-2.5 rounded-xl sub-box font-mono text-lg font-bold focus:outline-none focus:border-emerald-500">
+            <div class="flex gap-2">
+                <button onclick="closeCustomProteinModal()" class="flex-1 py-2.5 rounded-xl sub-box text-sm font-semibold">ยกเลิก</button>
+                <button onclick="submitCustomProtein()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-bold">เพิ่มโปรตีน</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings & JSON Backup/Import Modal -->
+    <div id="modal-settings" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="glass-card rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md max-h-[90vh] overflow-y-auto space-y-4 reveal-item">
+            <div class="flex items-center justify-between border-b border-slate-500/15 pb-3">
+                <h3 class="font-bold text-base">ตั้งค่าเป้าหมาย & สำรองข้อมูล</h3>
+                <button onclick="closeSettingsModal()" aria-label="ปิดหน้าต่าง" class="w-8 h-8 rounded-lg sub-box flex items-center justify-center text-slate-400 hover:text-rose-500">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Step Goal Toggle (8,500 vs 9,500) -->
+            <div class="sub-box rounded-xl p-3.5 space-y-2">
+                <span class="text-xs font-bold block">เป้าหมายก้าวเดินรายวัน</span>
+                <p class="text-[11px] text-slate-400">หากน้ำหนักนิ่ง 2 สัปดาห์ติด ให้ปรับเป็น 9,500 ก้าว/วัน (ไม่ต้องลดข้าว)</p>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button onclick="setStepGoal(8500)" id="goal-btn-8500" class="py-2 rounded-lg font-mono font-bold text-xs bg-emerald-600 text-white transition">8,500 ก้าว (ปกติ)</button>
+                    <button onclick="setStepGoal(9500)" id="goal-btn-9500" class="py-2 rounded-lg font-mono font-bold text-xs glass-card text-slate-400 transition">9,500 ก้าว (เร่งเผา)</button>
+                </div>
+            </div>
+
+            <!-- Daily Checkmarks Reset -->
+            <div class="sub-box rounded-xl p-3.5 flex items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold block">เริ่มวันใหม่ / ล้างติ๊กประจำวัน</span>
+                    <span class="text-[11px] text-slate-400">รีเซ็ตเซ็ตที่ติ๊ก ก้าวเดิน น้ำดื่ม และมื้ออาหารวันนี้</span>
+                </div>
+                <button onclick="resetAllDailyProgress()" class="px-3 py-2 rounded-lg bg-rose-500/15 text-rose-500 font-bold text-xs hover:bg-rose-500/25 transition flex-shrink-0">
+                    ล้างข้อมูลวันนี้
+                </button>
+            </div>
+
+            <!-- JSON Backup Export / Import -->
+            <div class="sub-box rounded-xl p-3.5 space-y-2.5">
+                <span class="text-xs font-bold block">สำรองและกู้คืนข้อมูล (JSON Backup)</span>
+                <button onclick="copyBackupJSON()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span>คัดลอกข้อมูลสำรอง (Export JSON)</span>
+                </button>
+
+                <div class="space-y-1.5 pt-1">
+                    <textarea id="import-json-textarea" rows="3" placeholder="วางโค้ด JSON สำรองข้อมูลที่นี่เพื่อกู้คืน..." class="w-full p-2.5 rounded-xl glass-card font-mono text-[11px] focus:outline-none focus:border-emerald-500"></textarea>
+                    <button onclick="importBackupJSON()" class="w-full py-2 rounded-xl glass-card hover:border-cyan-500/50 text-cyan-500 font-bold text-xs transition">
+                        นำเข้าข้อมูลจาก JSON (Import)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast-popup" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-xl glass-card border-emerald-500/40 text-xs font-semibold shadow-xl flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toast-message">บันทึกเรียบร้อย</span>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. EDWARD'S WORKOUT, NUTRITION & RULES MASTER DATA
+        // ============================================================
+        const workoutPlan = {
+            1: {
+                short: 'จ.',
+                name: 'วันจันทร์',
+                title: 'PULL A (หลัง + หน้าแขน + ขา)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
+                type: 'weight',
+                exercises: [
+                    { id: 'mon-1', group: '1. หลังบน (Lats)', name: 'Lat Pulldown — กดลงหน้าอก', muscle: 'Latissimus Dorsi', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'mon-2', group: '2. หลังกลาง (Mid Back)', name: 'Seated Cable Row — จับแคบ ดึงเข้าสะดือ', muscle: 'Rhomboids, Mid Traps', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'mon-3', group: '3. หลังล่าง-กลาง (Lower Lats)', name: 'Machine Row (Hammer Strength / Plate-Loaded)', muscle: 'Lower Lats, Teres Major', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'mon-4', group: '4. หน้าแขน (Biceps)', name: 'Cable Curl — บาร์ EZ ต่อสายล่าง', muscle: 'Biceps Brachii', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'mon-5', group: '5. หน้าแขนส่วนล่าง (Brachialis)', name: 'Machine Preacher Curl', muscle: 'Brachialis', sets: 3, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'mon-6', group: '6. ขา — ต้นขาหลัง (Hamstrings)', name: 'Seated Leg Curl', muscle: 'Hamstrings', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'mon-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            2: {
+                short: 'อ.',
+                name: 'วันอังคาร',
+                title: 'PUSH A (อก + ไหล่ + หลังแขน + ขา)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
+                type: 'weight',
+                exercises: [
+                    { id: 'tue-1', group: '1. อกกลาง (Mid Chest)', name: 'Machine Chest Press', muscle: 'Pectoralis Major (Sternal)', sets: 4, reps: '8–10 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'tue-2', group: '2. อกบน (Upper Chest)', name: 'Machine Incline Press', muscle: 'Pectoralis Major (Clavicular)', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'tue-3', group: '3. ไหล่หน้า-กลาง', name: 'Machine Shoulder Press', muscle: 'Anterior Deltoid', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'tue-4', group: '4. ไหล่ข้าง (Lateral Delt)', name: 'Cable Lateral Raise — สายล่าง ข้างเดียว', muscle: 'Lateral Deltoid', sets: 4, reps: '12–15 เรป/ข้าง', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'tue-5', group: '5. หลังแขน (Triceps)', name: 'Cable Pushdown — บาร์ตรงหรือเชือก', muscle: 'Triceps (Lateral & Medial)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'tue-6', group: '6. ขา — ต้นขาหน้า (Quadriceps)', name: 'Leg Extension', muscle: 'Quadriceps', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'tue-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            3: {
+                short: 'พ.',
+                name: 'วันพุธ',
+                title: 'เดินชัน 60 นาที (ไม่เวท)',
+                subtitle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน ไม่จับราว',
+                type: 'cardio',
+                exercises: [
+                    { id: 'wed-1', group: 'ช่วงที่ 1 (0–5 นาที)', name: 'วอร์มอัป: ชัน 5% / ความเร็ว 3.8 km/h', muscle: 'อบอุ่นกล้ามเนื้อและข้อต่อ', sets: 1, reps: '5 นาที', hr: 'Warm-up', restSec: 0, cat: 'cardio' },
+                    { id: 'wed-2', group: 'ช่วงที่ 2 (5–35 นาที)', name: 'เดินชันหลัก: ชัน 10% / ความเร็ว 4.0 km/h', muscle: 'ดึงไขมันสะสมช่วงลำตัว', sets: 1, reps: '30 นาที', hr: 'Incline 10%', restSec: 0, cat: 'cardio' },
+                    { id: 'wed-3', group: 'ช่วงที่ 3 (35–37 นาที)', name: 'พักปรับจังหวะ: ชัน 0% จิบน้ำ', muscle: 'พักสั้นๆ 2 นาที', sets: 1, reps: '2 นาที', hr: 'Rest 0%', restSec: 0, cat: 'isolation' },
+                    { id: 'wed-4', group: 'ช่วงที่ 4 (37–57 นาที)', name: 'เดินชันเข้ม: ชัน 12% / ความเร็ว 4.0–4.2 km/h', muscle: 'เร่งการเผาผลาญช่วงท้าย', sets: 1, reps: '20 นาที', hr: 'Incline 12%', restSec: 0, cat: 'compound' },
+                    { id: 'wed-5', group: 'ช่วงที่ 5 (57–60 นาที)', name: 'คูลดาวน์: ชัน 3% ลดความเร็วช้าลง', muscle: 'ผ่อนคลายกล้ามเนื้อขา', sets: 1, reps: '3 นาที', hr: 'Cool-down', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            4: {
+                short: 'พฤ.',
+                name: 'วันพฤหัสบดี',
+                title: 'PULL B (หลัง + ไหล่หลัง + หน้าแขน + ขา)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
+                type: 'weight',
+                exercises: [
+                    { id: 'thu-1', group: '1. หลังบน-ในสุด (Lats Stretch)', name: 'Machine Pullover', muscle: 'Lats, Teres Major, Serratus', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'thu-2', group: '2. หลังบน-กว้าง (Upper Back)', name: 'Cable Row จับกว้าง (Wide Grip)', muscle: 'Lats, Rear Delts, Rhomboids', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'thu-3', group: '3. ไหล่หลัง + หลังบน', name: 'Rear Delt Machine (Reverse Pec Deck)', muscle: 'Posterior Deltoid, Upper Traps', sets: 4, reps: '15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'thu-4', group: '4. หน้าแขน-นอก (Brachioradialis)', name: 'Cable Hammer Curl — เชือก ต่อสายล่าง', muscle: 'Brachioradialis, Biceps Long Head', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'thu-5', group: '5. ขา — ต้นขาหน้า+สะโพก', name: 'Leg Press — เท้ากว้างกลางแผ่น', muscle: 'Quads, Glutes', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'thu-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            5: {
+                short: 'ศ.',
+                name: 'วันศุกร์',
+                title: 'PUSH B (อก + ไหล่ + หลังแขน + ขา)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
+                type: 'weight',
+                exercises: [
+                    { id: 'fri-1', group: '1. อกใน-กลาง (Inner Chest)', name: 'Pec Deck / Machine Fly', muscle: 'Pectoralis Major (Inner)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'fri-2', group: '2. อกล่าง (Lower Chest)', name: 'Machine Decline Press / Cable Crossover มือต่ำ', muscle: 'Pectoralis Major (Lower)', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'fri-3', group: '3. ไหล่หน้า (Anterior Delt)', name: 'Machine Shoulder Press', muscle: 'Anterior Deltoid', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
+                    { id: 'fri-4', group: '4. ไหล่ข้าง (Lateral Delt)', name: 'Machine Lateral Raise / Cable Lateral Raise', muscle: 'Lateral Deltoid', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'fri-5', group: '5. หลังแขน - หัวยาว', name: 'Cable Overhead Extension — เชือก หันหลัง', muscle: 'Triceps (Long Head)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'fri-6', group: '6. ขา — สะโพก/ก้น (Glutes)', name: 'Machine Hip Thrust / Cable Pull-Through', muscle: 'Glutes, Hamstrings', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
+                    { id: 'fri-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            6: {
+                short: 'ส.',
+                name: 'วันเสาร์',
+                title: 'เดินชัน 60 นาที (ไม่เวท)',
+                subtitle: 'โปรแกรมเดียวกับวันพุธ • โหมด Watch: เดินในร่ม',
+                type: 'cardio',
+                exercises: [
+                    { id: 'sat-1', group: 'ช่วงที่ 1 (0–5 นาที)', name: 'วอร์มอัป: ชัน 5% / ความเร็ว 3.8 km/h', muscle: 'อบอุ่นกล้ามเนื้อและข้อต่อ', sets: 1, reps: '5 นาที', hr: 'Warm-up', restSec: 0, cat: 'cardio' },
+                    { id: 'sat-2', group: 'ช่วงที่ 2 (5–35 นาที)', name: 'เดินชันหลัก: ชัน 10% / ความเร็ว 4.0 km/h', muscle: 'ดึงไขมันสะสมช่วงลำตัว', sets: 1, reps: '30 นาที', hr: 'Incline 10%', restSec: 0, cat: 'cardio' },
+                    { id: 'sat-3', group: 'ช่วงที่ 3 (35–37 นาที)', name: 'พักปรับจังหวะ: ชัน 0% จิบน้ำ', muscle: 'พักสั้นๆ 2 นาที', sets: 1, reps: '2 นาที', hr: 'Rest 0%', restSec: 0, cat: 'isolation' },
+                    { id: 'sat-4', group: 'ช่วงที่ 4 (37–57 นาที)', name: 'เดินชันเข้ม: ชัน 12% / ความเร็ว 4.0–4.2 km/h', muscle: 'เร่งการเผาผลาญช่วงท้าย', sets: 1, reps: '20 นาที', hr: 'Incline 12%', restSec: 0, cat: 'compound' },
+                    { id: 'sat-5', group: 'ช่วงที่ 5 (57–60 นาที)', name: 'คูลดาวน์: ชัน 3% ลดความเร็วช้าลง', muscle: 'ผ่อนคลายกล้ามเนื้อขา', sets: 1, reps: '3 นาที', hr: 'Cool-down', restSec: 0, cat: 'cardio' }
+                ]
+            },
+            0: {
+                short: 'อา.',
+                name: 'วันอาทิตย์',
+                title: 'พักเต็ม (Full Rest)',
+                subtitle: 'ไม่ซ้อม • นอน 7–8 ชม. และปรับคาร์บวันพัก',
+                type: 'rest',
+                exercises: [
+                    { id: 'sun-1', group: 'การนอนฟื้นฟู', name: 'นอนหลับให้ได้ 7–8 ชั่วโมงเต็ม', muscle: 'ฟื้นฟูระบบประสาทและรักษามวลกล้ามเนื้อ', sets: 1, reps: '7–8 ชม.', hr: 'Recovery', restSec: 0, cat: 'cardio' },
+                    { id: 'sun-2', group: 'ปรับคาร์บวันพัก', name: 'ลดข้าวมื้อเที่ยงเหลือ 150g + เพิ่มไข่เป็น 3 ฟอง', muscle: 'คาร์บลดเหลือ ~120g แคลอรีรวม ~1,800 kcal เท่าเดิม', sets: 1, reps: '160g โปรตีน', hr: 'Low Carb', restSec: 0, cat: 'isolation' },
+                    { id: 'sun-3', group: 'น้ำดื่มและใยอาหาร', name: 'ดื่มน้ำ 3 ลิตร + กินผักและใยอาหารให้เพียงพอ', muscle: 'ช่วยให้ระบบขับถ่ายปกติและลดบวมน้ำ', sets: 1, reps: '3.0 ลิตร', hr: 'Hydration', restSec: 0, cat: 'cardio' }
+                ]
+            }
+        };
+
+        const realMealsList = [
+            {
+                id: 'm-1',
+                header: 'มื้อที่ 1 • ตื่นเช้า',
+                protein: 45,
+                trainDesc: 'เวย์ชงฟิตเวย์ (ถั่ว 2 สกู๊ป) + อเมริกาโน่ไม่หวาน',
+                restDesc: 'เวย์ชงฟิตเวย์ (ถั่ว 2 สกู๊ป) + อเมริกาโน่ไม่หวาน',
+                tip: 'เติมโปรตีนทันทีหลังตื่น สะดวกก่อนออกไปทำงาน'
+            },
+            {
+                id: 'm-2',
+                header: 'มื้อที่ 2 • 10:30 – 12:00 น. (มื้อทำงาน)',
+                protein: 40,
+                trainDesc: 'ข้าวเหนียวไก่ย่างลอกหนัง / กะเพราหมูสับผัดน้ำ / ปลากระป๋อง',
+                restDesc: 'ลดข้าวเหลือ 150g + เพิ่มไข่ต้มเป็น 3 ฟอง + กับข้าวโปรตีนสูง',
+                tip: 'เลี่ยงคอหมูย่างหรือเมนูติดมันจัด เพื่อคุมไขมันรวมไม่ให้เกิน 60g'
+            },
+            {
+                id: 'm-3',
+                header: 'มื้อที่ 3 • 15:30 น. (ก่อนซ้อม 1 ชม.)',
+                protein: 33,
+                trainDesc: 'กล้วยหอม 1 ลูก + โปรตีนขวด (~33 กรัม)',
+                restDesc: 'โปรตีนขวด (~33 กรัม) + ผลไม้หวานน้อยหรือถั่วเล็กน้อย',
+                tip: 'ให้พลังงานก่อนเวทรอบเย็นและช่วยคุมความหิวช่วงบ่าย'
+            },
+            {
+                id: 'm-4',
+                header: 'มื้อที่ 4 • 19:30 – 20:00 น. (หลังซ้อม)',
+                protein: 42,
+                trainDesc: 'สุกี้หมูเส้นน้อยพิเศษ + ไข่ขาวต้ม 3 ฟอง (หรือไก่ตุ๋น / ก๋วยเตี๋ยว)',
+                restDesc: 'สุกี้หมูเส้นน้อยพิเศษ + ไข่ขาวต้ม 3 ฟอง / ปลากระป๋อง + ผัก',
+                tip: 'ระวังน้ำจิ้มสุกี้ราดเยอะและเลี่ยงน้ำมันเจียว/กากหมู'
+            }
+        ];
+
+        const dailyRulesData = [
+            { id: 'rule-1', text: 'กินโปรตีนครบ 160g แบ่ง 4 มื้อ (มื้อละ 35–45g)' },
+            { id: 'rule-2', text: 'คุมพลังงาน ~1,800 kcal และห้ามกินต่ำกว่า 1,600 kcal/วัน' },
+            { id: 'rule-3', text: 'ดื่มน้ำสะอาดครบ 3 ลิตร + กินผักและใยอาหารให้เพียงพอ' },
+            { id: 'rule-4', text: 'นอนหลับอย่างน้อย 7 ชั่วโมงขึ้นไป (นอน 5–6 ชม. ทำให้น้ำหนักนิ่ง)' },
+            { id: 'rule-5', text: 'งดอกไก่ปั่นและขวด 600 ml ตามที่ตั้งใจไว้ (ใช้เมนูจริง 4 มื้อ)' }
+        ];
+
+        // ============================================================
+        // 2. PERSISTENT STATE & INITIALIZATION
+        // ============================================================
+        const todayDateObj = new Date();
+        const todayKey = todayDateObj.toISOString().split('T')[0];
+        let activeDayIndex = todayDateObj.getDay();
+        // activeDayIndex ใช้ getDay() ตามปกติ (0=อา, 1=จ, ...)
+
+        const initialData = {
+            theme: 'dark',
+            soundOn: true,
+            lastDate: todayKey,
+            steps: 0,
+            stepTarget: 8500,
+            waterMl: 0,
+            proteinG: 0,
+            completedSets: {},
+            exerciseMetrics: {},
+            checkedMeals: {},
+            checkedRules: {},
+            weighIns: [
+                { date: '21/11/2026', weight: 82.40, fat: 20.8, muscle: 61.96, note: 'จุดเริ่มต้นเฟสลดไขมัน (-5.6 kg สู่เป้าแรก 76.8 kg)' }
+            ]
+        };
+
+        // localStorage with try/catch (artifact may block it)
+        let savedLocal = {};
+        try { savedLocal = JSON.parse(localStorage.getItem('edward_fitness_app_v3')) || {}; } catch(e) {}
+        let appData = { ...initialData, ...savedLocal };
+
+        // Auto reset daily counters if date changed
+        if (appData.lastDate !== todayKey) {
+            appData.lastDate = todayKey;
+            appData.steps = 0;
+            appData.waterMl = 0;
+            appData.proteinG = 0;
+            appData.completedSets = {};
+            appData.checkedMeals = {};
+            appData.checkedRules = {};
+            persistData();
+        }
+
+        function persistData() {
+            try { localStorage.setItem('edward_fitness_app_v3', JSON.stringify(appData)); } catch(e) {}
+        }
+
+        function showToast(msg) {
+            const el = document.getElementById('toast-popup');
+            document.getElementById('toast-message').textContent = msg;
+            el.classList.remove('hidden');
+            clearTimeout(window._toastTimeout);
+            window._toastTimeout = setTimeout(() => el.classList.add('hidden'), 2400);
+        }
+
+        // ============================================================
+        // 3. THEME & NAVIGATION
+        // ============================================================
+        function applyTheme(mode) {
+            if (mode === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            appData.theme = mode;
+            persistData();
+            drawTrajectoryChart();
+        }
+
+        function toggleTheme() {
+            const next = appData.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            showToast(next === 'dark' ? 'เปลี่ยนเป็นโหมดมืด (Dark Mode)' : 'เปลี่ยนเป็นโหมดสว่าง (Light Mode)');
+        }
+
+        function switchMainTab(tabName, idx) {
+            const names = ['workout', 'timer', 'nutrition', 'progress'];
+            names.forEach((name, i) => {
+                const view = document.getElementById(`view-${name}`);
+                const btn = document.getElementById(`tab-btn-${i}`);
+                if (name === tabName) {
+                    view.classList.remove('hidden');
+                    view.style.opacity = '0';
+                    view.style.transform = 'translateY(6px)';
+                    requestAnimationFrame(() => {
+                        view.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                        view.style.opacity = '1';
+                        view.style.transform = 'translateY(0)';
+                    });
+                    btn.classList.remove('text-slate-400');
+                    btn.classList.add('text-emerald-500');
+                } else {
+                    view.classList.add('hidden');
+                    view.style.transition = '';
+                    btn.classList.add('text-slate-400');
+                    btn.classList.remove('text-emerald-500');
+                }
+            });
+            document.getElementById('nav-pill-slider').style.transform = `translateX(${idx * 100}%)`;
+            if (tabName === 'progress') drawTrajectoryChart();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 4. RINGS (STEPS & WATER)
+        // ============================================================
+        function renderActivityRings() {
+            const circ = 163.36; // 2 * Math.PI * 26
+            const stepRatio = Math.min(1, appData.steps / appData.stepTarget);
+            document.getElementById('ring-steps').style.strokeDashoffset = circ * (1 - stepRatio);
+            document.getElementById('steps-count-text').textContent = appData.steps.toLocaleString();
+            document.getElementById('steps-target-text').textContent = appData.stepTarget.toLocaleString();
+
+            const waterRatio = Math.min(1, appData.waterMl / 3000);
+            document.getElementById('ring-water').style.strokeDashoffset = circ * (1 - waterRatio);
+            document.getElementById('water-count-text').textContent = (appData.waterMl / 1000).toFixed(2);
+        }
+
+        function addSteps(amount) {
+            appData.steps += amount;
+            persistData();
+            renderActivityRings();
+            showToast(`เพิ่ม +${amount.toLocaleString()} ก้าว (รวม ${appData.steps.toLocaleString()})`);
+        }
+
+        function openStepInputModal() {
+            document.getElementById('field-custom-steps').value = appData.steps || '';
+            document.getElementById('modal-steps').classList.remove('hidden');
+        }
+
+        function closeStepInputModal() {
+            document.getElementById('modal-steps').classList.add('hidden');
+        }
+
+        function submitCustomSteps() {
+            const val = parseInt(document.getElementById('field-custom-steps').value, 10);
+            if (!isNaN(val) && val >= 0) {
+                appData.steps = val;
+                persistData();
+                renderActivityRings();
+                showToast(`อัปเดตก้าวเดินเป็น ${val.toLocaleString()} ก้าว`);
+            }
+            closeStepInputModal();
+        }
+
+        function addWater(ml) {
+            appData.waterMl += ml;
+            persistData();
+            renderActivityRings();
+            showToast(`บันทึกดื่มน้ำ +${ml} ml (${(appData.waterMl / 1000).toFixed(2)} L)`);
+        }
+
+        function resetWaterToday() {
+            appData.waterMl = 0;
+            persistData();
+            renderActivityRings();
+            showToast('รีเซ็ตปริมาณน้ำวันนี้แล้ว');
+        }
+
+        // ============================================================
+        // 5. WORKOUT SCHEDULE & SET LOGGING
+        // ============================================================
+        function renderDaySelector() {
+            const orderedDays = [1, 2, 3, 4, 5, 6, 0];
+            const bar = document.getElementById('day-pills-bar');
+            bar.innerHTML = orderedDays.map(d => {
+                const info = workoutPlan[d];
+                const isSelected = d === activeDayIndex;
+                return `
+                    <button onclick="selectWorkoutDay(${d})" class="flex-1 min-w-[44px] py-2.5 rounded-xl font-bold text-xs transition active:scale-95 ${
+                        isSelected
+                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
+                        : 'glass-card text-slate-500 dark:text-slate-400 hover:border-emerald-500/40'
+                    }">
+                        ${info.short}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectWorkoutDay(d) {
+            activeDayIndex = d;
+            renderDaySelector();
+            renderWorkoutExercises();
+            const macroMode = workoutPlan[d].type === 'weight' ? 'train' : 'rest';
+            switchMacroDay(macroMode, false);
+        }
+
+        function toggleSetButton(exId, setIndex, totalSets, restSec, cat) {
+            if (!appData.completedSets[exId]) {
+                appData.completedSets[exId] = Array(totalSets).fill(false);
+            }
+            const nextState = !appData.completedSets[exId][setIndex];
+            appData.completedSets[exId][setIndex] = nextState;
+            persistData();
+            renderWorkoutExercises();
+
+            if (nextState && restSec > 0) {
+                const tag = cat === 'compound' ? 'Compound • HR ≤ 120 bpm' : 'Isolation • HR ≤ 110 bpm';
+                startRestCountdown(restSec, tag);
+                showToast(`จบเซ็ต ${setIndex + 1} • เริ่มจับเวลาพัก ${restSec} วิ`);
+            }
+        }
+
+        function updateExerciseMetric(exId, key, val) {
+            if (!appData.exerciseMetrics[exId]) {
+                appData.exerciseMetrics[exId] = { weight: '', reps: '' };
+            }
+            appData.exerciseMetrics[exId][key] = val;
+            persistData();
+        }
+
+        function renderWorkoutExercises() {
+            const dayObj = workoutPlan[activeDayIndex];
+            const container = document.getElementById('session-exercises-wrapper');
+
+            let totalSets = 0;
+            let doneSets = 0;
+            dayObj.exercises.forEach(ex => {
+                totalSets += ex.sets;
+                const arr = appData.completedSets[ex.id] || [];
+                doneSets += arr.filter(Boolean).length;
+            });
+            const progressPct = totalSets > 0 ? Math.round((doneSets / totalSets) * 100) : 0;
+
+            let html = `
+                <div class="glass-card rounded-2xl p-4 space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 font-bold text-[11px]">${dayObj.name}</span>
+                        <span class="font-mono font-bold text-xs text-emerald-500">${doneSets}/${totalSets} เซ็ต (${progressPct}%)</span>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg font-extrabold tracking-tight">${dayObj.title}</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">${dayObj.subtitle}</p>
+                    </div>
+                    <div class="w-full h-1.5 rounded-full sub-box overflow-hidden">
+                        <div class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                    </div>
+                </div>
+            `;
+
+            dayObj.exercises.forEach((ex, i) => {
+                const setsState = appData.completedSets[ex.id] || Array(ex.sets).fill(false);
+                const allDone = setsState.length > 0 && setsState.every(Boolean);
+                const metric = appData.exerciseMetrics[ex.id] || { weight: '', reps: '' };
+                const showInputs = dayObj.type === 'weight' && ex.cat !== 'cardio';
+
+                let pillStyle = 'bg-emerald-500/12 text-emerald-500';
+                if (ex.cat === 'compound') pillStyle = 'bg-amber-500/12 text-amber-500';
+                if (ex.cat === 'isolation') pillStyle = 'bg-cyan-500/12 text-cyan-500';
+
+                let setButtons = '';
+                for (let s = 0; s < ex.sets; s++) {
+                    const checked = !!setsState[s];
+                    const label = ex.sets === 1 ? 'สำเร็จ' : `S${s + 1}`;
+                    setButtons += `
+                        <button onclick="toggleSetButton('${ex.id}', ${s}, ${ex.sets}, ${ex.restSec}, '${ex.cat}')"
+                            class="px-3 py-1.5 rounded-lg font-mono font-bold text-xs transition active:scale-90 flex items-center gap-1 ${
+                                checked
+                                ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30'
+                                : 'sub-box text-slate-600 dark:text-slate-300 hover:border-emerald-500/50'
+                            }">
+                            ${checked ? '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                            <span>${label}</span>
+                        </button>
+                    `;
+                }
+
+                html += `
+                    <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item ${allDone ? 'opacity-70 border-emerald-500/30' : ''}" style="animation-delay: ${i * 0.035}s">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <span class="text-[11px] font-bold text-emerald-500 block">${ex.group}</span>
+                                <h3 class="font-bold text-sm sm:text-base mt-0.5 ${allDone ? 'line-through text-slate-400' : ''}">${ex.name}</h3>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${ex.muscle} • <span class="font-semibold">${ex.sets > 1 ? ex.sets + ' เซ็ต × ' : ''}${ex.reps}</span></p>
+                            </div>
+                            ${ex.restSec > 0 ? `
+                                <button onclick="jumpToRest('${ex.restSec}', '${ex.cat}')" class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex items-center gap-1 flex-shrink-0 active:scale-95 transition ${pillStyle}">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/></svg>
+                                    ${ex.hr}
+                                </button>
+                            ` : `
+                                <span class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex-shrink-0 ${pillStyle}">${ex.hr}</span>
+                            `}
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-500/10">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                ${setButtons}
+                            </div>
+
+                            ${showInputs ? `
+                                <div class="flex items-center gap-1.5">
+                                    <div class="flex items-center sub-box rounded-lg px-2 py-1">
+                                        <input type="number" step="0.5" value="${metric.weight}" onchange="updateExerciseMetric('${ex.id}', 'weight', this.value)" placeholder="0" class="w-11 bg-transparent text-right font-mono font-bold text-xs focus:outline-none">
+                                        <span class="text-[10px] text-slate-400 ml-1">kg</span>
+                                    </div>
+                                    <div class="flex items-center sub-box rounded-lg px-2 py-1">
+                                        <input type="number" value="${metric.reps}" onchange="updateExerciseMetric('${ex.id}', 'reps', this.value)" placeholder="12" class="w-8 bg-transparent text-right font-mono font-bold text-xs focus:outline-none">
+                                        <span class="text-[10px] text-slate-400 ml-1">เรป</span>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function jumpToRest(secStr, cat) {
+            const sec = parseInt(secStr, 10);
+            switchMainTab('timer', 1);
+            const tag = cat === 'compound' ? 'Compound • HR ≤ 120 bpm' : 'Isolation • HR ≤ 110 bpm';
+            startRestCountdown(sec, tag);
+        }
+
+        function toggleVolumeDrawer() {
+            const body = document.getElementById('volume-drawer-body');
+            const chev = document.getElementById('volume-chevron');
+            const isHidden = body.classList.contains('hidden');
+            if (isHidden) {
+                body.classList.remove('hidden');
+                chev.style.transform = 'rotate(180deg)';
+            } else {
+                body.classList.add('hidden');
+                chev.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // ============================================================
+        // 6. REST TIMER & INCLINE TREADMILL COACH
+        // ============================================================
+        let restDuration = 90;
+        let restLeft = 90;
+        let restInterval = null;
+        let restRunning = false;
+
+        function playBeepAlert() {
+            if (!appData.soundOn) return;
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+                osc.frequency.setValueAtTime(1174.66, ctx.currentTime + 0.14);
+                gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } catch (e) {}
+        }
+
+        function toggleAudioAlert() {
+            appData.soundOn = !appData.soundOn;
+            persistData();
+            document.getElementById('audio-state-label').textContent = appData.soundOn ? 'เสียงเตือน: เปิด' : 'เสียงเตือน: ปิด';
+            showToast(appData.soundOn ? 'เปิดเสียงแจ้งเตือนแล้ว' : 'ปิดเสียงแจ้งเตือนแล้ว');
+        }
+
+        function formatMMSS(sec) {
+            const m = Math.floor(sec / 60).toString().padStart(2, '0');
+            const s = (sec % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function drawRestCircle() {
+            const full = 552.92;
+            const ratio = restDuration > 0 ? (restLeft / restDuration) : 0;
+            document.getElementById('rest-ring-progress').style.strokeDashoffset = full * (1 - ratio);
+            document.getElementById('rest-clock-text').textContent = formatMMSS(restLeft);
+        }
+
+        function startRestCountdown(sec, tagLabel) {
+            clearInterval(restInterval);
+            restDuration = sec;
+            restLeft = sec;
+            restRunning = true;
+
+            document.getElementById('rest-mode-tag').textContent = tagLabel;
+            document.getElementById('rest-hint-text').textContent = 'กำลังพักฟื้น HR...';
+            document.getElementById('rest-circle-container').classList.add('timer-pulse');
+            document.getElementById('rest-action-btn').innerHTML = '<span>หยุดชั่วคราว</span>';
+            drawRestCircle();
+
+            restInterval = setInterval(() => {
+                if (restLeft > 0) {
+                    restLeft--;
+                    drawRestCircle();
+                } else {
+                    clearInterval(restInterval);
+                    restRunning = false;
+                    document.getElementById('rest-circle-container').classList.remove('timer-pulse');
+                    document.getElementById('rest-hint-text').textContent = 'ครบเวลาพักแล้ว ลุยเซ็ตต่อไป!';
+                    document.getElementById('rest-action-btn').innerHTML = '<span>เริ่มใหม่</span>';
+                    playBeepAlert();
+                    showToast('ครบเวลาพักแล้ว เช็ก HR แล้วลุยเซ็ตต่อไปเลย');
+                }
+            }, 1000);
+        }
+
+        function toggleRestPause() {
+            if (restRunning) {
+                clearInterval(restInterval);
+                restRunning = false;
+                document.getElementById('rest-circle-container').classList.remove('timer-pulse');
+                document.getElementById('rest-hint-text').textContent = 'หยุดชั่วคราว';
+                document.getElementById('rest-action-btn').innerHTML = '<span>จับเวลาต่อ</span>';
+            } else {
+                if (restLeft <= 0) restLeft = restDuration;
+                startRestCountdown(restLeft, document.getElementById('rest-mode-tag').textContent);
+            }
+        }
+
+        function resetRestCountdown() {
+            clearInterval(restInterval);
+            restRunning = false;
+            restLeft = restDuration;
+            document.getElementById('rest-circle-container').classList.remove('timer-pulse');
+            document.getElementById('rest-hint-text').textContent = 'พร้อมเริ่มจับเวลา';
+            document.getElementById('rest-action-btn').innerHTML = '<span>เริ่มจับเวลาพัก</span>';
+            drawRestCircle();
+        }
+
+        // Treadmill Coach
+        let tmModeMins = 20;
+        let tmSeconds = 0;
+        let tmInterval = null;
+        let tmRunning = false;
+
+        const tmPhasesData = {
+            20: [
+                { start: 0, end: 20, title: 'เดินชันต่อเนื่องหลังเวท', incline: '10%', speed: '4.0 km/h' }
+            ],
+            60: [
+                { start: 0, end: 5, title: 'ช่วง 1: วอร์มอัป', incline: '5%', speed: '3.8 km/h' },
+                { start: 5, end: 35, title: 'ช่วง 2: เดินชันหลัก', incline: '10%', speed: '4.0 km/h' },
+                { start: 35, end: 37, title: 'ช่วง 3: พักจิบน้ำ', incline: '0%', speed: '3.0 km/h' },
+                { start: 37, end: 57, title: 'ช่วง 4: เดินชันเข้ม', incline: '12%', speed: '4.0–4.2 km/h' },
+                { start: 57, end: 60, title: 'ช่วง 5: คูลดาวน์', incline: '3%', speed: '3.5 km/h' }
+            ]
+        };
+
+        function switchTreadmillMode(mins) {
+            tmModeMins = mins;
+            resetTreadmillRun();
+            document.getElementById('tm-mode-20').className = mins === 20
+                ? 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition'
+                : 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+            document.getElementById('tm-mode-60').className = mins === 60
+                ? 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition'
+                : 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+            renderTreadmillCoach();
+        }
+
+        function renderTreadmillCoach() {
+            const totalSec = tmModeMins * 60;
+            const curMin = Math.floor(tmSeconds / 60);
+            const phases = tmPhasesData[tmModeMins];
+            const activePhase = phases.find(p => curMin >= p.start && curMin < p.end) || phases[0];
+
+            const phaseStartSec = activePhase.start * 60;
+            const phaseDurSec = (activePhase.end - activePhase.start) * 60;
+            const phasePct = phaseDurSec > 0 ? Math.min(100, Math.round(((tmSeconds - phaseStartSec) / phaseDurSec) * 100)) : 0;
+
+            document.getElementById('tm-timer-readout').innerHTML = `${formatMMSS(tmSeconds)} <span class="text-base font-normal text-slate-400">/ ${tmModeMins}:00</span>`;
+            document.getElementById('tm-phase-badge').textContent = activePhase.title;
+            document.getElementById('tm-phase-bar').style.width = `${phasePct}%`;
+            document.getElementById('tm-incline-readout').textContent = activePhase.incline;
+            document.getElementById('tm-speed-readout').textContent = activePhase.speed;
+
+            document.getElementById('tm-phase-list').innerHTML = phases.map(p => {
+                const isNow = tmRunning && curMin >= p.start && curMin < p.end;
+                return `
+                    <div class="flex items-center justify-between p-2.5 rounded-xl border transition ${
+                        isNow ? 'bg-emerald-500/15 border-emerald-500/40 font-bold' : 'sub-box text-slate-500 dark:text-slate-400'
+                    }">
+                        <span>${p.title} (${p.start}–${p.end} นาที)</span>
+                        <span class="font-mono ${isNow ? 'text-emerald-500' : ''}">ชัน ${p.incline} | ${p.speed}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleTreadmillRun() {
+            if (tmRunning) {
+                clearInterval(tmInterval);
+                tmRunning = false;
+                document.getElementById('tm-start-btn').textContent = 'เดินต่อ';
+                renderTreadmillCoach();
+            } else {
+                if (tmSeconds >= tmModeMins * 60) tmSeconds = 0;
+                tmRunning = true;
+                document.getElementById('tm-start-btn').textContent = 'หยุดชั่วคราว';
+                let lastIdx = 0;
+
+                tmInterval = setInterval(() => {
+                    tmSeconds++;
+                    const curMin = Math.floor(tmSeconds / 60);
+                    const phases = tmPhasesData[tmModeMins];
+                    const idx = phases.findIndex(p => curMin >= p.start && curMin < p.end);
+                    if (idx !== -1 && idx !== lastIdx) {
+                        lastIdx = idx;
+                        playBeepAlert();
+                        showToast(`เปลี่ยนช่วง: ${phases[idx].title} (ชัน ${phases[idx].incline})`);
+                    }
+
+                    renderTreadmillCoach();
+
+                    if (tmSeconds >= tmModeMins * 60) {
+                        clearInterval(tmInterval);
+                        tmRunning = false;
+                        document.getElementById('tm-start-btn').textContent = 'เสร็จสิ้น';
+                        playBeepAlert();
+                        showToast('เดินชันครบเวลาแล้ว กดบวกก้าวเดินหน้าแรกได้เลย');
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTreadmillRun() {
+            clearInterval(tmInterval);
+            tmRunning = false;
+            tmSeconds = 0;
+            document.getElementById('tm-start-btn').textContent = 'เริ่มเดินชัน';
+            renderTreadmillCoach();
+        }
+
+        // ============================================================
+        // 7. NUTRITION, PROTEIN TRACKER & DAILY RULES
+        // ============================================================
+        let currentMacroMode = 'train';
+
+        function switchMacroDay(mode, toastAlert = true) {
+            currentMacroMode = mode;
+            const bTrain = document.getElementById('macro-btn-train');
+            const bRest = document.getElementById('macro-btn-rest');
+
+            if (mode === 'train') {
+                bTrain.className = 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition';
+                bRest.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+                document.getElementById('macro-carb-num').textContent = '170g';
+                document.getElementById('macro-carb-tag').textContent = 'วันเวท';
+                document.getElementById('macro-fat-num').textContent = '60g';
+            } else {
+                bRest.className = 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition';
+                bTrain.className = 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+                document.getElementById('macro-carb-num').textContent = '120g';
+                document.getElementById('macro-carb-tag').textContent = 'วันพัก/ชัน';
+                document.getElementById('macro-fat-num').textContent = '76g';
+            }
+            renderNutritionSection();
+            if (toastAlert) {
+                showToast(mode === 'train' ? 'สลับเป็นวันเวท (คาร์บ 170g)' : 'สลับเป็นวันพัก/เดินชัน (คาร์บ 120g)');
+            }
+        }
+
+        function addProtein(g) {
+            appData.proteinG += g;
+            persistData();
+            renderNutritionSection();
+            showToast(`เพิ่มโปรตีน +${g}g (รวม ${appData.proteinG}g)`);
+        }
+
+        function resetProteinToday() {
+            appData.proteinG = 0;
+            persistData();
+            renderNutritionSection();
+            showToast('รีเซ็ตโปรตีนสะสมวันนี้แล้ว');
+        }
+
+        function openCustomProteinModal() {
+            document.getElementById('field-custom-protein').value = '';
+            document.getElementById('modal-protein').classList.remove('hidden');
+        }
+
+        function closeCustomProteinModal() {
+            document.getElementById('modal-protein').classList.add('hidden');
+        }
+
+        function submitCustomProtein() {
+            const val = parseInt(document.getElementById('field-custom-protein').value, 10);
+            if (!isNaN(val) && val > 0) {
+                addProtein(val);
+            }
+            closeCustomProteinModal();
+        }
+
+        function toggleMealItem(mealId, proteinVal) {
+            const nextVal = !appData.checkedMeals[mealId];
+            appData.checkedMeals[mealId] = nextVal;
+            if (nextVal) {
+                appData.proteinG += proteinVal;
+            } else {
+                appData.proteinG = Math.max(0, appData.proteinG - proteinVal);
+            }
+            persistData();
+            renderNutritionSection();
+        }
+
+        function resetMealsToday() {
+            appData.checkedMeals = {};
+            persistData();
+            renderNutritionSection();
+            showToast('ล้างติ๊กมื้ออาหารวันนี้แล้ว');
+        }
+
+        function toggleRuleItem(ruleId) {
+            appData.checkedRules[ruleId] = !appData.checkedRules[ruleId];
+            persistData();
+            renderNutritionSection();
+        }
+
+        function resetRulesToday() {
+            appData.checkedRules = {};
+            persistData();
+            renderNutritionSection();
+            showToast('รีเซ็ตกติกาประจำวันแล้ว');
+        }
+
+        function renderNutritionSection() {
+            const pTotal = appData.proteinG;
+            const pPct = Math.min(100, Math.round((pTotal / 160) * 100));
+            document.getElementById('protein-summary-pill').textContent = `${pTotal} / 160g`;
+            document.getElementById('protein-percent-label').textContent = `${pPct}%`;
+            document.getElementById('protein-progress-fill').style.width = `${pPct}%`;
+
+            document.getElementById('meal-cards-container').innerHTML = realMealsList.map(m => {
+                const isDone = !!appData.checkedMeals[m.id];
+                const menu = currentMacroMode === 'train' ? m.trainDesc : m.restDesc;
+                return `
+                    <button onclick="toggleMealItem('${m.id}', ${m.protein})" class="w-full text-left p-3.5 rounded-xl border transition flex items-start gap-3 ${
+                        isDone ? 'bg-emerald-500/12 border-emerald-500/40 opacity-75' : 'sub-box hover:border-emerald-500/40'
+                    }">
+                        <span class="mt-0.5 w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center border transition ${
+                            isDone ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-slate-400/40'
+                        }">
+                            ${isDone ? '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                        </span>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-emerald-500">${m.header}</span>
+                                <span class="font-mono font-bold text-xs text-slate-400">+${m.protein}g P</span>
+                            </div>
+                            <p class="text-sm font-semibold mt-0.5 ${isDone ? 'line-through text-slate-400' : ''}">${menu}</p>
+                            <p class="text-[11px] text-slate-400 mt-0.5">${m.tip}</p>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('daily-rules-container').innerHTML = dailyRulesData.map(r => {
+                const isDone = !!appData.checkedRules[r.id];
+                return `
+                    <button onclick="toggleRuleItem('${r.id}')" class="w-full text-left p-3 rounded-xl border transition flex items-center gap-3 ${
+                        isDone ? 'bg-emerald-500/12 border-emerald-500/35 text-slate-400' : 'sub-box hover:border-emerald-500/40'
+                    }">
+                        <span class="w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center border ${
+                            isDone ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-slate-400/40'
+                        }">
+                            ${isDone ? '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                        </span>
+                        <span class="text-xs font-medium ${isDone ? 'line-through' : ''}">${r.text}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // ============================================================
+        // 8. WEEKLY CHECK-IN, COACHING LOGIC & SVG LINE CHART
+        // ============================================================
+        function saveWeighInEntry() {
+            const dateVal = document.getElementById('input-checkin-date').value.trim() || new Date().toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            const w = parseFloat(document.getElementById('input-checkin-weight').value);
+            const f = parseFloat(document.getElementById('input-checkin-fat').value);
+            const m = parseFloat(document.getElementById('input-checkin-muscle').value);
+
+            if (isNaN(w) || w < 45 || w > 140) {
+                showToast('กรุณากรอกน้ำหนักที่ถูกต้องครับ');
+                return;
+            }
+
+            const prev = appData.weighIns[0];
+            const prev2 = appData.weighIns[1];
+            const wDiff = prev ? +(w - prev.weight).toFixed(2) : 0;
+            const mDiff = (prev && !isNaN(m)) ? +(m - prev.muscle).toFixed(2) : 0;
+
+            let advice = '';
+            if (!isNaN(m) && mDiff < -0.3) {
+                advice = `มวลกล้ามเนื้อลดลง ${Math.abs(mDiff)} kg (เกิน 0.3 kg) — กินน้อยไป แนะนำเพิ่มข้าว +50g/วัน ทันที`;
+            } else if (wDiff <= -0.4 && wDiff >= -0.65) {
+                advice = `ลง ${Math.abs(wDiff)} kg อยู่ในเกณฑ์ดีมาก (0.4–0.6 kg/วีค) ทำตามแผนเดิมต่อไม่ต้องเปลี่ยนอะไร`;
+            } else if (Math.abs(wDiff) <= 0.15) {
+                const stalledTwoWeeks = prev2 && Math.abs(prev.weight - prev2.weight) <= 0.15;
+                advice = stalledTwoWeeks
+                    ? `น้ำหนักนิ่ง 2 วีคติดแล้ว — ไม่ต้องลดข้าว ให้เพิ่มเป้าเดินเป็น 9,500 ก้าว/วัน`
+                    : `น้ำหนักทรงตัว (${wDiff >= 0 ? '+' : ''}${wDiff} kg) — รอดูอีก 1 วีค ถ้านิ่ง 2 วีคติดค่อยเพิ่มเดินเป็น 9,500 ก้าว`;
+            } else if (wDiff < -0.65) {
+                advice = `ลงเร็ว (${wDiff} kg) — ระวังอย่ากินต่ำกว่า 1,600 kcal และเช็กความสดชื่นตอนซ้อม`;
+            } else {
+                advice = `บันทึกผลแล้ว (${wDiff >= 0 ? '+' : ''}${wDiff} kg จากรอบก่อน)`;
+            }
+
+            appData.weighIns.unshift({
+                date: dateVal,
+                weight: w,
+                fat: isNaN(f) ? (prev ? prev.fat : 20.8) : f,
+                muscle: isNaN(m) ? (prev ? prev.muscle : 61.96) : m,
+                note: advice
+            });
+
+            persistData();
+            const fbBox = document.getElementById('coaching-feedback-box');
+            fbBox.innerHTML = `<p class="font-bold text-emerald-500">คำแนะนำจากเกณฑ์ 7 วัน:</p><p>${advice}</p>`;
+            fbBox.classList.remove('hidden');
+
+            document.getElementById('input-checkin-weight').value = '';
+            document.getElementById('input-checkin-fat').value = '';
+            document.getElementById('input-checkin-muscle').value = '';
+
+            renderWeighInList();
+            drawTrajectoryChart();
+            showToast('บันทึกผลชั่งน้ำหนักราย 7 วันเรียบร้อย');
+        }
+
+        function removeWeighIn(idx) {
+            if (appData.weighIns.length <= 1) {
+                showToast('ต้องมีข้อมูลเริ่มต้นไว้อย่างน้อย 1 รายการครับ');
+                return;
+            }
+            appData.weighIns.splice(idx, 1);
+            persistData();
+            renderWeighInList();
+            drawTrajectoryChart();
+            showToast('ลบรายการชั่งน้ำหนักแล้ว');
+        }
+
+        function renderWeighInList() {
+            const latest = appData.weighIns[0];
+            if (latest) {
+                document.getElementById('header-goal-line').textContent = `${latest.weight.toFixed(1)} → 76.8 kg (-5.6 kg)`;
+                document.getElementById('current-weight-pill').textContent = `${latest.weight.toFixed(1)} kg`;
+                const rem = Math.max(0, +(latest.weight - 76.8).toFixed(1));
+                document.getElementById('kg-left-badge').textContent = rem.toFixed(1);
+            }
+
+            document.getElementById('weighin-history-container').innerHTML = appData.weighIns.map((item, idx) => `
+                <div class="sub-box rounded-xl p-3 flex items-center justify-between gap-2">
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono font-bold text-xs">${item.date}</span>
+                            ${idx === 0 ? '<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-500 text-[10px] font-bold">ล่าสุด</span>' : ''}
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-0.5">${item.note}</p>
+                    </div>
+                    <div class="text-right font-mono flex-shrink-0 flex items-center gap-2">
+                        <div>
+                            <span class="font-extrabold text-sm block">${item.weight.toFixed(2)} kg</span>
+                            <span class="text-[10px] text-cyan-500">กล้าม ${item.muscle.toFixed(2)} | ไขมัน ${item.fat}%</span>
+                        </div>
+                        ${idx > 0 ? `
+                            <button onclick="removeWeighIn(${idx})" aria-label="ลบรายการ" class="text-slate-400 hover:text-rose-500 p-1">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function drawTrajectoryChart() {
+            const svg = document.getElementById('trajectory-svg');
+            if (!svg) return;
+
+            const w = 360;
+            const h = 135;
+            const padL = 32;
+            const padR = 14;
+            const padT = 16;
+            const padB = 18;
+            const minKg = 76.0;
+            const maxKg = 83.2;
+
+            const toX = (wk) => padL + (wk / 12) * (w - padL - padR);
+            const toY = (kg) => h - padB - ((kg - minKg) / (maxKg - minKg)) * (h - padT - padB);
+
+            const gridLevels = [82.4, 80.0, 77.8, 76.8];
+            const gridHtml = gridLevels.map(val => {
+                const y = toY(val);
+                return `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="currentColor" stroke-opacity="0.08" stroke-width="1"/>
+                    <text x="0" y="${y + 3}" fill="currentColor" fill-opacity="0.5" font-size="9" font-family="JetBrains Mono">${val.toFixed(1)}</text>
+                `;
+            }).join('');
+
+            const targetCoords = [
+                { wk: 0, kg: 82.4 },
+                { wk: 4, kg: 80.0 },
+                { wk: 8, kg: 77.8 },
+                { wk: 12, kg: 76.8 }
+            ];
+            const targetPath = targetCoords.map((pt, i) => `${i === 0 ? 'M' : 'L'} ${toX(pt.wk)} ${toY(pt.kg)}`).join(' ');
+
+            const orderedLogs = [...appData.weighIns].reverse();
+            const actualCoords = orderedLogs.map((entry, idx) => ({
+                x: toX(Math.min(12, idx)),
+                y: toY(entry.weight)
+            }));
+            const actualPath = actualCoords.map((pt, i) => `${i === 0 ? 'M' : 'L'} ${pt.x} ${pt.y}`).join(' ');
+            const circlesHtml = actualCoords.map(pt => `
+                <circle cx="${pt.x}" cy="${pt.y}" r="4.5" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+            `).join('');
+
+            svg.innerHTML = `
+                ${gridHtml}
+                <path d="${targetPath}" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4 4"/>
+                <path d="${actualPath}" fill="none" stroke="#10b981" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                ${circlesHtml}
+            `;
+        }
+
+        // ============================================================
+        // 9. SETTINGS & JSON BACKUP / IMPORT
+        // ============================================================
+        function openSettingsModal() {
+            updateStepGoalButtons();
+            document.getElementById('modal-settings').classList.remove('hidden');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('modal-settings').classList.add('hidden');
+        }
+
+        function updateStepGoalButtons() {
+            const b85 = document.getElementById('goal-btn-8500');
+            const b95 = document.getElementById('goal-btn-9500');
+            if (appData.stepTarget === 8500) {
+                b85.className = 'py-2 rounded-lg font-mono font-bold text-xs bg-emerald-600 text-white transition';
+                b95.className = 'py-2 rounded-lg font-mono font-bold text-xs glass-card text-slate-400 transition';
+            } else {
+                b95.className = 'py-2 rounded-lg font-mono font-bold text-xs bg-emerald-600 text-white transition';
+                b85.className = 'py-2 rounded-lg font-mono font-bold text-xs glass-card text-slate-400 transition';
+            }
+        }
+
+        function setStepGoal(target) {
+            appData.stepTarget = target;
+            persistData();
+            updateStepGoalButtons();
+            renderActivityRings();
+            showToast(`ปรับเป้าก้าวเดินเป็น ${target.toLocaleString()} ก้าว/วัน แล้ว`);
+        }
+
+        function resetAllDailyProgress() {
+            appData.steps = 0;
+            appData.waterMl = 0;
+            appData.proteinG = 0;
+            appData.completedSets = {};
+            appData.checkedMeals = {};
+            appData.checkedRules = {};
+            persistData();
+            renderActivityRings();
+            renderWorkoutExercises();
+            renderNutritionSection();
+            closeSettingsModal();
+            showToast('ล้างบันทึกประจำวันเรียบร้อยแล้ว');
+        }
+
+        function copyBackupJSON() {
+            const jsonText = JSON.stringify(appData, null, 2);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(jsonText).then(function() {
+                    showToast('คัดลอก JSON สำรองข้อมูลลงคลิปบอร์ดแล้ว');
+                }).catch(function() {
+                    fallbackCopy(jsonText);
+                });
+            } else {
+                fallbackCopy(jsonText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;left:-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); showToast('คัดลอก JSON สำรองข้อมูลแล้ว'); }
+            catch(e) { showToast('ไม่สามารถคัดลอกได้ กรุณากดค้างเพื่อเลือกข้อความ'); }
+            document.body.removeChild(ta);
+        }
+
+        function importBackupJSON() {
+            const raw = document.getElementById('import-json-textarea').value.trim();
+            if (!raw) {
+                showToast('กรุณาวางโค้ด JSON ก่อนกดนำเข้าครับ');
+                return;
+            }
+            try {
+                const parsed = JSON.parse(raw);
+                if (typeof parsed !== 'object' || parsed === null) throw new Error('Invalid');
+                appData = { ...initialData, ...parsed };
+                persistData();
+                applyTheme(appData.theme || 'dark');
+                renderActivityRings();
+                renderWorkoutExercises();
+                renderNutritionSection();
+                renderWeighInList();
+                drawTrajectoryChart();
+                document.getElementById('import-json-textarea').value = '';
+                closeSettingsModal();
+                showToast('กู้คืนข้อมูลจาก JSON สำเร็จเรียบร้อย');
+            } catch (err) {
+                showToast('รูปแบบ JSON ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง');
+            }
+        }
+
+        // ============================================================
+        // 10. WINDOW ONLOAD INIT
+        // ============================================================
+        window.onload = function() {
+            applyTheme(appData.theme || 'dark');
+
+            const now = new Date();
+            document.getElementById('current-date-label').textContent = now.toLocaleDateString('th-TH', {
+                weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'
+            });
+            document.getElementById('input-checkin-date').value = now.toLocaleDateString('th-TH', {
+                day: '2-digit', month: '2-digit', year: 'numeric'
+            });
+
+            if (!appData.soundOn) {
+                document.getElementById('audio-state-label').textContent = 'เสียงเตือน: ปิด';
+            }
+
+            renderActivityRings();
+            renderDaySelector();
+            renderWorkoutExercises();
+            switchMacroDay(workoutPlan[activeDayIndex].type === 'weight' ? 'train' : 'rest', false);
+            renderTreadmillCoach();
+            renderWeighInList();
+            drawTrajectoryChart();
+
+            // Dismiss splash screen
+            setTimeout(function() {
+                var splash = document.getElementById('splash-screen');
+                if (splash) {
+                    splash.classList.add('fade-out');
+                    setTimeout(function() { splash.remove(); }, 500);
+                }
+            }, 600);
+        };
+    </script>
+</body>
+</html>
