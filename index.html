@@ -1989,12 +1989,12 @@
         // ============================================================
         const AI_PROVIDERS = {
             gemini: {
-                label: 'Gemini', prefix: 'AIza', store: 'edward_ai_key_gemini', ph: 'AIza...',
+                label: 'Gemini', prefixes: ['AIza', 'AQ.'], store: 'edward_ai_key_gemini', ph: 'AIza...',
                 models: ['gemini-2.5-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite'],
                 hint: 'ใช้ฟรี: ขอ key ที่ aistudio.google.com/apikey (ล็อกอินบัญชี Google ไม่ต้องผูกบัตร) แล้ววางที่นี่ เก็บในเครื่องนี้เท่านั้น ข้อควรรู้: ในแพ็กฟรี Google อาจนำข้อมูลไปปรับปรุงผลิตภัณฑ์ จึงไม่ควรถ่ายรูปที่เห็นใบหน้าหรือข้อมูลส่วนตัว และมีโควตาต่อวันจำกัด'
             },
             claude: {
-                label: 'Claude', prefix: 'sk-ant-', store: 'edward_ai_key', ph: 'sk-ant-...', model: 'claude-sonnet-5-5',
+                label: 'Claude', prefixes: ['sk-ant-'], store: 'edward_ai_key', ph: 'sk-ant-...', model: 'claude-sonnet-5-5',
                 hint: 'ใส่ Claude API key (เสียเงินตามการใช้งาน) เก็บในเครื่องนี้เท่านั้น ไม่รวมในไฟล์สำรอง รูปส่งตรงไป api.anthropic.com'
             }
         };
@@ -2014,7 +2014,7 @@
         function saveAiKey() {
             const pv = AI_PROVIDERS[getProvider()];
             const v = document.getElementById('food-api-key').value.trim();
-            if (!v.startsWith(pv.prefix)) { showToast(`key ของ ${pv.label} ต้องขึ้นต้นด้วย ${pv.prefix}`); return; }
+            if (!pv.prefixes.some(p => v.startsWith(p))) { showToast(`key ของ ${pv.label} ต้องขึ้นต้นด้วย ${pv.prefixes.join(' หรือ ')}`); return; }
             try { localStorage.setItem(pv.store, v); } catch (e) { showToast('บันทึก key ในเครื่องนี้ไม่ได้'); return; }
             document.getElementById('food-api-key').value = '';
             renderFoodAI();
