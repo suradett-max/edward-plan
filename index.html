@@ -205,11 +205,13 @@
                 type: 'image/png'
             }]
         };
-        var blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-        var link = document.createElement('link');
-        link.rel = 'manifest';
-        link.href = URL.createObjectURL(blob);
-        document.head.appendChild(link);
+        try {
+            var blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+            var link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = URL.createObjectURL(blob);
+            document.head.appendChild(link);
+        } catch (e) {}
     })();
     </script>
 
@@ -259,6 +261,8 @@
         <!-- TAB 1: ตารางซ้อม & วงแหวนประจำวัน (WORKOUT & DAILY RINGS)     -->
         <!-- ============================================================ -->
         <section id="view-workout" class="space-y-4">
+
+            <div id="smart-reminder" class="hidden glass-card rounded-2xl p-3 flex items-center gap-2 border-emerald-500/40"></div>
 
             <!-- Goal Summary & Activity Rings Card -->
             <div class="glass-card rounded-2xl p-4 space-y-4 reveal-item delay-1 shadow-sm">
@@ -336,31 +340,28 @@
             <!-- Daily Workout Session & Exercise List -->
             <div id="session-exercises-wrapper" class="space-y-3 reveal-item delay-3"></div>
 
-            <!-- Weekly Volume Drawer -->
-            <div class="glass-card rounded-2xl overflow-hidden reveal-item delay-4">
+            <!-- HR & Rules Drawer -->
+            <div class="glass-card rounded-2xl overflow-hidden">
                 <button onclick="toggleVolumeDrawer()" class="w-full p-4 flex items-center justify-between text-left hover:bg-emerald-500/5 transition">
                     <div class="flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-500 flex items-center justify-center">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                         </div>
                         <div>
-                            <h3 class="font-bold text-sm">สรุปปริมาณการฝึกรายสัปดาห์ (Weekly Volume)</h3>
-                            <p class="text-[11px] text-slate-400">เวท ~95 เซ็ต/สัปดาห์ • เดินชันรวม 200 นาที/สัปดาห์</p>
+                            <h3 class="font-bold text-sm">กฎ HR พักระหว่างเซ็ต</h3>
+                            <p class="text-[11px] text-slate-400">เลกเพรส ≤ 115 • ท่าอื่น ≤ 110 • เดินชัน 110–125</p>
                         </div>
                     </div>
                     <svg id="volume-chevron" class="w-4 h-4 text-slate-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div id="volume-drawer-body" class="hidden px-4 pb-4 pt-1 border-t border-slate-500/10 space-y-2 text-xs">
-                    <div class="grid grid-cols-2 gap-2 pt-2 font-body">
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หลัง (Lats / Mid Back)</span><strong class="font-mono text-emerald-500">16 เซ็ต</strong></div>
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>อก (Chest)</span><strong class="font-mono text-emerald-500">16 เซ็ต</strong></div>
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หน้าแขน (Biceps)</span><strong class="font-mono text-emerald-500">15 เซ็ต</strong></div>
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>หลังแขน (Triceps)</span><strong class="font-mono text-emerald-500">8+ เซ็ต</strong></div>
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>ไหล่หน้า / ข้าง / หลัง</span><strong class="font-mono text-emerald-500">8 / 8 / 4</strong></div>
-                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>ขาหน้า / หลัง / ก้น</span><strong class="font-mono text-emerald-500">8 / 4 / 8</strong></div>
+                    <div class="grid grid-cols-1 gap-2 pt-2 font-body">
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>Leg Press (3 ตำแหน่งเท้า)</span><strong class="font-mono text-emerald-500">พักจน HR ≤ 115</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>ท่าอื่นทั้งหมด</span><strong class="font-mono text-emerald-500">พักจน HR ≤ 110</strong></div>
+                        <div class="sub-box rounded-lg p-2.5 flex justify-between"><span>เดินชัน</span><strong class="font-mono text-emerald-500">คุม HR 110–125</strong></div>
                     </div>
                     <p class="text-[11px] text-slate-400 pt-1">
-                        กฎเหล็ก: น้ำหนักเหล็กเท่าเดิมห้ามลด (RPE 7–8/10) • หากพักครบเวลาแล้ว HR ยังค้างเกิน 130 bpm ให้ตัดท่าสุดท้ายออก
+                        น้ำหนักเหล็กเท่าเดิมห้ามลด (RPE 7–8/10) • ถ้าพักครบแล้ว HR ยังค้างเกิน 130 bpm ให้ตัดท่าสุดท้ายออก • คิวไม่ผูกกับวัน: หยุดกี่วันก็เล่นคิวต่อไป ไม่ต้องชดเชย
                     </p>
                 </div>
             </div>
@@ -391,7 +392,7 @@
                         <circle id="rest-ring-progress" class="ring-stroke" cx="100" cy="100" r="88" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-dasharray="552.92" stroke-dashoffset="0"/>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span id="rest-mode-tag" class="text-[11px] font-bold text-amber-500 mb-1">Compound • HR ≤ 120 bpm</span>
+                        <span id="rest-mode-tag" class="text-[11px] font-bold text-amber-500 mb-1">Compound • HR ≤ 110 bpm</span>
                         <div id="rest-clock-text" class="font-mono text-5xl font-extrabold tracking-tight">01:30</div>
                         <span id="rest-hint-text" class="text-[11px] text-slate-400 mt-1">พร้อมเริ่มจับเวลา</span>
                     </div>
@@ -399,11 +400,11 @@
 
                 <!-- 4 Presets: Compound 90s / 120s & Isolation 60s / 75s -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    <button onclick="startRestCountdown(90, 'Compound • HR ≤ 120 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
+                    <button onclick="startRestCountdown(90, 'Compound • HR ≤ 110 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
                         <span class="block font-mono font-extrabold text-sm text-amber-500">90 วิ</span>
-                        <span class="block text-[10px] text-slate-400 mt-0.5">Compound (HR≤120)</span>
+                        <span class="block text-[10px] text-slate-400 mt-0.5">Compound (HR≤110)</span>
                     </button>
-                    <button onclick="startRestCountdown(120, 'Compound หนัก • HR ≤ 120 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
+                    <button onclick="startRestCountdown(120, 'Compound หนัก • HR ≤ 110 bpm')" class="p-2.5 rounded-xl sub-box hover:border-amber-500/50 active:scale-95 transition text-center">
                         <span class="block font-mono font-extrabold text-sm text-amber-500">120 วิ</span>
                         <span class="block text-[10px] text-slate-400 mt-0.5">Compound หนัก</span>
                     </button>
@@ -439,14 +440,11 @@
                     <p class="text-xs text-slate-400 mt-0.5">Apple Watch โหมด: เดินในร่ม • ปล่อยมือแกว่งแขนไม่จับราว</p>
                 </div>
 
-                <!-- Mode A (20m) vs Mode B (60m) -->
-                <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl sub-box">
-                    <button onclick="switchTreadmillMode(20)" id="tm-mode-20" class="py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">
-                        หลังเวท 20 นาที (จ/อ/พฤ/ศ)
-                    </button>
-                    <button onclick="switchTreadmillMode(60)" id="tm-mode-60" class="py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition">
-                        วันเดินชัน 60 นาที (พ/ส)
-                    </button>
+                <p class="text-[11px] font-semibold text-emerald-500">เป้า HR ระหว่างเดินชัน 110–125 bpm</p>
+                <div class="grid grid-cols-3 gap-1.5 p-1 rounded-xl sub-box">
+                    <button onclick="switchTreadmillMode(10)" id="tm-mode-10" class="py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition">รีบ 10 นาที</button>
+                    <button onclick="switchTreadmillMode(20)" id="tm-mode-20" class="py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition">หลังเวท 20 นาที</button>
+                    <button onclick="switchTreadmillMode(60)" id="tm-mode-60" class="py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition">เดินชัน 60 นาที</button>
                 </div>
 
                 <!-- Live Phase Display -->
@@ -597,6 +595,8 @@
         <!-- ============================================================ -->
         <section id="view-progress" class="hidden space-y-4">
 
+            <div id="bodycomp-summary" class="glass-card rounded-2xl p-4 space-y-3"></div>
+
             <!-- 12-Week SVG Trajectory Chart -->
             <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item delay-1">
                 <div class="flex items-center justify-between">
@@ -671,6 +671,21 @@
                     </div>
                 </div>
 
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">โปรตีน (kg)</label>
+                        <input type="number" step="0.1" id="input-checkin-protein" placeholder="14.8" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">BMR (kcal)</label>
+                        <input type="number" id="input-checkin-bmr" placeholder="1777" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">ไขมันช่องท้อง</label>
+                        <input type="number" id="input-checkin-visceral" placeholder="9" class="w-full px-2.5 py-2 rounded-xl sub-box font-mono text-xs font-bold focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
                 <button onclick="saveWeighInEntry()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 active:scale-98 transition">
                     บันทึกผลและวิเคราะห์แนวโน้ม
                 </button>
@@ -709,6 +724,11 @@
             </div>
         </div>
     </nav>
+
+    <!-- Equipment Modal -->
+    <div id="modal-equip" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div id="equip-modal-body" class="glass-card rounded-t-2xl sm:rounded-2xl p-5 w-full max-w-sm space-y-3" style="padding-bottom: max(1.25rem, env(safe-area-inset-bottom));"></div>
+    </div>
 
     <!-- Custom Step Input Modal -->
     <div id="modal-steps" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
@@ -794,108 +814,80 @@
         // ============================================================
         // 1. EDWARD'S WORKOUT, NUTRITION & RULES MASTER DATA
         // ============================================================
-        const workoutPlan = {
-            1: {
-                short: 'จ.',
-                name: 'วันจันทร์',
-                title: 'PULL A (หลัง + หน้าแขน + ขา)',
-                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
-                type: 'weight',
+        const QUEUE = ['PUSH', 'PULL', 'LEG'];
+
+        const mk = (id, group, name, muscle, sets, reps, cat, o = {}) => ({
+            id, group, name, muscle, sets, reps, cat,
+            restSec: cat === 'compound' ? 90 : 60,
+            hrMax: 110, core: false, ...o
+        });
+        const walk = (id, mins) => ({
+            id, cardio: true, mins, group: 'คาร์ดิโอปิดท้าย',
+            name: `เดินชัน ${mins} นาที (ชัน 8–10% / 4.0 km/h)`,
+            muscle: 'โหมด Watch: เดินในร่ม • คุม HR 110–125 bpm',
+            sets: 1, reps: `${mins} นาที`, cat: 'cardio', restSec: 0, hrText: 'HR 110–125'
+        });
+        const LP_ALT = 'Leg Press ยันกลาง (เครื่องอีกตัว)';
+
+        const sessionDefs = {
+            PUSH: {
+                name: 'คิว PUSH', title: 'PUSH (อก + ไหล่ + หลังแขน)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที', type: 'weight',
                 exercises: [
-                    { id: 'mon-1', group: '1. หลังบน (Lats)', name: 'Lat Pulldown — กดลงหน้าอก', muscle: 'Latissimus Dorsi', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'mon-2', group: '2. หลังกลาง (Mid Back)', name: 'Seated Cable Row — จับแคบ ดึงเข้าสะดือ', muscle: 'Rhomboids, Mid Traps', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'mon-3', group: '3. หลังล่าง-กลาง (Lower Lats)', name: 'Machine Row (Hammer Strength / Plate-Loaded)', muscle: 'Lower Lats, Teres Major', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'mon-4', group: '4. หน้าแขน (Biceps)', name: 'Cable Curl — บาร์ EZ ต่อสายล่าง', muscle: 'Biceps Brachii', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'mon-5', group: '5. หน้าแขนส่วนล่าง (Brachialis)', name: 'Machine Preacher Curl', muscle: 'Brachialis', sets: 3, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'mon-6', group: '6. ขา — ต้นขาหลัง (Hamstrings)', name: 'Seated Leg Curl', muscle: 'Hamstrings', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'mon-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                    mk('push-1', '1. อกกลาง', 'Machine Chest Press', 'Pectoralis Major', 4, '8–10 เรป', 'compound', { core: true, alt: 'Dumbbell Bench Press', other: 'Dumbbell Bench Press / Push-up' }),
+                    mk('push-2', '2. อกบน', 'Machine Incline Press', 'Upper Chest', 4, '10–12 เรป', 'compound', { alt: 'Dumbbell Incline Press', other: 'Incline Dumbbell Press' }),
+                    mk('push-3', '3. ไหล่หน้า-กลาง', 'Machine Shoulder Press', 'Anterior Deltoid', 4, '10–12 เรป', 'compound', { core: true, alt: 'Dumbbell Shoulder Press', other: 'Dumbbell Shoulder Press' }),
+                    mk('push-4', '4. อกใน', 'Pec Deck / Machine Fly', 'Inner Chest', 3, '12–15 เรป', 'isolation', { alt: 'Cable Crossover', other: 'Dumbbell Fly' }),
+                    mk('push-5', '5. ไหล่ข้าง', 'Cable Lateral Raise — สายล่าง ข้างเดียว', 'Lateral Deltoid', 4, '12–15 เรป/ข้าง', 'isolation', { alt: 'Dumbbell Lateral Raise', other: 'Dumbbell Lateral Raise' }),
+                    mk('push-6', '6. หลังแขน', 'Cable Pushdown — บาร์ตรงหรือเชือก', 'Triceps', 4, '12–15 เรป', 'isolation', { alt: 'Dumbbell Triceps Extension', other: 'Dumbbell Triceps Kickback / Bench Dip' }),
+                    mk('push-7', '7. หลังแขนหัวยาว', 'Cable Overhead Extension — เชือก หันหลัง', 'Triceps Long Head', 3, '12–15 เรป', 'isolation', { alt: 'Dumbbell Overhead Extension', other: 'Dumbbell Overhead Extension' }),
+                    walk('push-c', 20)
                 ]
             },
-            2: {
-                short: 'อ.',
-                name: 'วันอังคาร',
-                title: 'PUSH A (อก + ไหล่ + หลังแขน + ขา)',
-                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
-                type: 'weight',
+            PULL: {
+                name: 'คิว PULL', title: 'PULL (หลัง + ไหล่หลัง + หน้าแขน)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที', type: 'weight',
                 exercises: [
-                    { id: 'tue-1', group: '1. อกกลาง (Mid Chest)', name: 'Machine Chest Press', muscle: 'Pectoralis Major (Sternal)', sets: 4, reps: '8–10 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'tue-2', group: '2. อกบน (Upper Chest)', name: 'Machine Incline Press', muscle: 'Pectoralis Major (Clavicular)', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'tue-3', group: '3. ไหล่หน้า-กลาง', name: 'Machine Shoulder Press', muscle: 'Anterior Deltoid', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'tue-4', group: '4. ไหล่ข้าง (Lateral Delt)', name: 'Cable Lateral Raise — สายล่าง ข้างเดียว', muscle: 'Lateral Deltoid', sets: 4, reps: '12–15 เรป/ข้าง', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'tue-5', group: '5. หลังแขน (Triceps)', name: 'Cable Pushdown — บาร์ตรงหรือเชือก', muscle: 'Triceps (Lateral & Medial)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'tue-6', group: '6. ขา — ต้นขาหน้า (Quadriceps)', name: 'Leg Extension', muscle: 'Quadriceps', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'tue-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                    mk('pull-1', '1. หลังบน (Lats)', 'Lat Pulldown — กดลงหน้าอก', 'Latissimus Dorsi', 4, '10–12 เรป', 'compound', { core: true, alt: 'Assisted Pull-up', other: 'Pull-up / Dumbbell Pullover' }),
+                    mk('pull-2', '2. หลังกลาง', 'Seated Cable Row — จับแคบ ดึงเข้าสะดือ', 'Mid Back', 4, '10–12 เรป', 'compound', { core: true, alt: 'One-arm Dumbbell Row', other: 'One-arm Dumbbell Row' }),
+                    mk('pull-3', '3. หลังล่าง-กลาง', 'Machine Row (Hammer Strength / Plate-Loaded)', 'Lower Lats', 3, '10–12 เรป', 'compound', { alt: 'Cable Row จับกว้าง', other: 'Bent-over Dumbbell Row' }),
+                    mk('pull-4', '4. ไหล่หลัง', 'Rear Delt Machine (Reverse Pec Deck)', 'Posterior Deltoid', 4, '15 เรป', 'isolation', { alt: 'Dumbbell Rear Delt Fly', other: 'Dumbbell Rear Delt Fly' }),
+                    mk('pull-5', '5. หน้าแขน', 'Cable Curl — บาร์ EZ ต่อสายล่าง', 'Biceps', 4, '12–15 เรป', 'isolation', { alt: 'Dumbbell Curl', other: 'Dumbbell Curl' }),
+                    mk('pull-6', '6. หน้าแขนนอก', 'Cable Hammer Curl — เชือก ต่อสายล่าง', 'Brachioradialis', 3, '12–15 เรป', 'isolation', { alt: 'Dumbbell Hammer Curl', other: 'Dumbbell Hammer Curl' }),
+                    walk('pull-c', 20)
                 ]
             },
-            3: {
-                short: 'พ.',
-                name: 'วันพุธ',
-                title: 'เดินชัน 60 นาที (ไม่เวท)',
-                subtitle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน ไม่จับราว',
-                type: 'cardio',
+            LEG: {
+                name: 'คิว LEG', title: 'LEG (ขา + ก้น)',
+                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที', type: 'weight',
                 exercises: [
-                    { id: 'wed-1', group: 'ช่วงที่ 1 (0–5 นาที)', name: 'วอร์มอัป: ชัน 5% / ความเร็ว 3.8 km/h', muscle: 'อบอุ่นกล้ามเนื้อและข้อต่อ', sets: 1, reps: '5 นาที', hr: 'Warm-up', restSec: 0, cat: 'cardio' },
-                    { id: 'wed-2', group: 'ช่วงที่ 2 (5–35 นาที)', name: 'เดินชันหลัก: ชัน 10% / ความเร็ว 4.0 km/h', muscle: 'ดึงไขมันสะสมช่วงลำตัว', sets: 1, reps: '30 นาที', hr: 'Incline 10%', restSec: 0, cat: 'cardio' },
-                    { id: 'wed-3', group: 'ช่วงที่ 3 (35–37 นาที)', name: 'พักปรับจังหวะ: ชัน 0% จิบน้ำ', muscle: 'พักสั้นๆ 2 นาที', sets: 1, reps: '2 นาที', hr: 'Rest 0%', restSec: 0, cat: 'isolation' },
-                    { id: 'wed-4', group: 'ช่วงที่ 4 (37–57 นาที)', name: 'เดินชันเข้ม: ชัน 12% / ความเร็ว 4.0–4.2 km/h', muscle: 'เร่งการเผาผลาญช่วงท้าย', sets: 1, reps: '20 นาที', hr: 'Incline 12%', restSec: 0, cat: 'compound' },
-                    { id: 'wed-5', group: 'ช่วงที่ 5 (57–60 นาที)', name: 'คูลดาวน์: ชัน 3% ลดความเร็วช้าลง', muscle: 'ผ่อนคลายกล้ามเนื้อขา', sets: 1, reps: '3 นาที', hr: 'Cool-down', restSec: 0, cat: 'cardio' }
+                    mk('leg-1', '1. เลกเพรส — เท้าระดับไหล่', 'Leg Press นอนยัน 45° — เท้าระดับไหล่', 'Quads, Glutes', 3, '10–12 เรป', 'compound', { core: true, hrMax: 115, alt: LP_ALT, other: 'Dumbbell Goblet Squat', seedLabel: '80 / 100 kg' }),
+                    mk('leg-2', '2. เลกเพรส — เท้าบน', 'Leg Press นอนยัน 45° — เท้าบน', 'Glutes, Hamstrings', 3, '10–12 เรป', 'compound', { core: true, hrMax: 115, alt: LP_ALT, other: 'Dumbbell Lunge' }),
+                    mk('leg-3', '3. เลกเพรส — เท้าล่าง', 'Leg Press นอนยัน 45° — เท้าล่าง', 'Quads', 3, '10–12 เรป', 'compound', { core: true, hrMax: 115, alt: LP_ALT, other: 'Dumbbell Squat / Step-up' }),
+                    mk('leg-4', '4. ต้นขาหน้า', 'Leg Extension นั่งเหยียด', 'Quadriceps', 4, '12–15 เรป', 'isolation', { core: true, alt: 'Dumbbell Split Squat เบาๆ', other: 'Bulgarian Split Squat' }),
+                    mk('leg-5', '5. ต้นขาหลัง', 'B8 Leg Curl นอนคว่ำ', 'Hamstrings', 4, '12–15 เรป', 'isolation', { alt: 'Leg Curl เตะหลัง (Cable Kickback)', other: 'Dumbbell Romanian Deadlift' }),
+                    mk('leg-6', '6. น่อง', 'Calf Raise', 'Calves', 4, '15 เรป', 'isolation', { alt: 'Calf Raise บนขั้นบันได', other: 'Calf Raise ยืนบนขั้น' }),
+                    walk('leg-c', 20)
                 ]
             },
-            4: {
-                short: 'พฤ.',
-                name: 'วันพฤหัสบดี',
-                title: 'PULL B (หลัง + ไหล่หลัง + หน้าแขน + ขา)',
-                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
-                type: 'weight',
+            CARDIO: {
+                name: 'เดินชัน 60', title: 'เดินชัน 60 นาที (ไม่เวท)',
+                subtitle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน คุม HR 110–125', type: 'cardio',
                 exercises: [
-                    { id: 'thu-1', group: '1. หลังบน-ในสุด (Lats Stretch)', name: 'Machine Pullover', muscle: 'Lats, Teres Major, Serratus', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'thu-2', group: '2. หลังบน-กว้าง (Upper Back)', name: 'Cable Row จับกว้าง (Wide Grip)', muscle: 'Lats, Rear Delts, Rhomboids', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'thu-3', group: '3. ไหล่หลัง + หลังบน', name: 'Rear Delt Machine (Reverse Pec Deck)', muscle: 'Posterior Deltoid, Upper Traps', sets: 4, reps: '15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'thu-4', group: '4. หน้าแขน-นอก (Brachioradialis)', name: 'Cable Hammer Curl — เชือก ต่อสายล่าง', muscle: 'Brachioradialis, Biceps Long Head', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'thu-5', group: '5. ขา — ต้นขาหน้า+สะโพก', name: 'Leg Press — เท้ากว้างกลางแผ่น', muscle: 'Quads, Glutes', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'thu-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
+                    { id: 'cd-1', group: 'ช่วงที่ 1 (0–5 นาที)', name: 'วอร์มอัป: ชัน 5% / 3.8 km/h', muscle: 'อบอุ่นกล้ามเนื้อและข้อต่อ', sets: 1, reps: '5 นาที', hrText: 'Warm-up', restSec: 0, cat: 'cardio' },
+                    { id: 'cd-2', group: 'ช่วงที่ 2 (5–35 นาที)', name: 'เดินชันหลัก: ชัน 10% / 4.0 km/h', muscle: 'ดึงไขมันสะสมช่วงลำตัว', sets: 1, reps: '30 นาที', hrText: 'HR 110–125', restSec: 0, cat: 'cardio' },
+                    { id: 'cd-3', group: 'ช่วงที่ 3 (35–37 นาที)', name: 'พักปรับจังหวะ: ชัน 0% จิบน้ำ', muscle: 'พักสั้นๆ 2 นาที', sets: 1, reps: '2 นาที', hrText: 'Rest 0%', restSec: 0, cat: 'isolation' },
+                    { id: 'cd-4', group: 'ช่วงที่ 4 (37–57 นาที)', name: 'เดินชันเข้ม: ชัน 12% / 4.0–4.2 km/h', muscle: 'เร่งการเผาผลาญช่วงท้าย', sets: 1, reps: '20 นาที', hrText: 'HR 110–125', restSec: 0, cat: 'compound' },
+                    { id: 'cd-5', group: 'ช่วงที่ 5 (57–60 นาที)', name: 'คูลดาวน์: ชัน 3% ลดความเร็ว', muscle: 'ผ่อนคลายกล้ามเนื้อขา', sets: 1, reps: '3 นาที', hrText: 'Cool-down', restSec: 0, cat: 'cardio' }
                 ]
             },
-            5: {
-                short: 'ศ.',
-                name: 'วันศุกร์',
-                title: 'PUSH B (อก + ไหล่ + หลังแขน + ขา)',
-                subtitle: 'เวท 45–50 นาที → เดินชัน 20 นาที',
-                type: 'weight',
+            REST: {
+                name: 'พัก', title: 'พักเต็ม (Full Rest)',
+                subtitle: 'ไม่ซ้อม • นอน 7–8 ชม. และปรับคาร์บวันพัก', type: 'rest',
                 exercises: [
-                    { id: 'fri-1', group: '1. อกใน-กลาง (Inner Chest)', name: 'Pec Deck / Machine Fly', muscle: 'Pectoralis Major (Inner)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'fri-2', group: '2. อกล่าง (Lower Chest)', name: 'Machine Decline Press / Cable Crossover มือต่ำ', muscle: 'Pectoralis Major (Lower)', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'fri-3', group: '3. ไหล่หน้า (Anterior Delt)', name: 'Machine Shoulder Press', muscle: 'Anterior Deltoid', sets: 4, reps: '10–12 เรป', hr: 'HR ≤ 120', restSec: 90, cat: 'compound' },
-                    { id: 'fri-4', group: '4. ไหล่ข้าง (Lateral Delt)', name: 'Machine Lateral Raise / Cable Lateral Raise', muscle: 'Lateral Deltoid', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'fri-5', group: '5. หลังแขน - หัวยาว', name: 'Cable Overhead Extension — เชือก หันหลัง', muscle: 'Triceps (Long Head)', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'fri-6', group: '6. ขา — สะโพก/ก้น (Glutes)', name: 'Machine Hip Thrust / Cable Pull-Through', muscle: 'Glutes, Hamstrings', sets: 4, reps: '12–15 เรป', hr: 'HR ≤ 110', restSec: 60, cat: 'isolation' },
-                    { id: 'fri-c', group: 'คาร์ดิโอปิดท้าย', name: 'เดินชัน 20 นาที (ชัน 8–10% / 4.0 km/h)', muscle: 'โหมด Watch: เดินในร่ม • ปล่อยมือแกว่งแขน', sets: 1, reps: '20 นาที', hr: 'เดินในร่ม', restSec: 0, cat: 'cardio' }
-                ]
-            },
-            6: {
-                short: 'ส.',
-                name: 'วันเสาร์',
-                title: 'เดินชัน 60 นาที (ไม่เวท)',
-                subtitle: 'โปรแกรมเดียวกับวันพุธ • โหมด Watch: เดินในร่ม',
-                type: 'cardio',
-                exercises: [
-                    { id: 'sat-1', group: 'ช่วงที่ 1 (0–5 นาที)', name: 'วอร์มอัป: ชัน 5% / ความเร็ว 3.8 km/h', muscle: 'อบอุ่นกล้ามเนื้อและข้อต่อ', sets: 1, reps: '5 นาที', hr: 'Warm-up', restSec: 0, cat: 'cardio' },
-                    { id: 'sat-2', group: 'ช่วงที่ 2 (5–35 นาที)', name: 'เดินชันหลัก: ชัน 10% / ความเร็ว 4.0 km/h', muscle: 'ดึงไขมันสะสมช่วงลำตัว', sets: 1, reps: '30 นาที', hr: 'Incline 10%', restSec: 0, cat: 'cardio' },
-                    { id: 'sat-3', group: 'ช่วงที่ 3 (35–37 นาที)', name: 'พักปรับจังหวะ: ชัน 0% จิบน้ำ', muscle: 'พักสั้นๆ 2 นาที', sets: 1, reps: '2 นาที', hr: 'Rest 0%', restSec: 0, cat: 'isolation' },
-                    { id: 'sat-4', group: 'ช่วงที่ 4 (37–57 นาที)', name: 'เดินชันเข้ม: ชัน 12% / ความเร็ว 4.0–4.2 km/h', muscle: 'เร่งการเผาผลาญช่วงท้าย', sets: 1, reps: '20 นาที', hr: 'Incline 12%', restSec: 0, cat: 'compound' },
-                    { id: 'sat-5', group: 'ช่วงที่ 5 (57–60 นาที)', name: 'คูลดาวน์: ชัน 3% ลดความเร็วช้าลง', muscle: 'ผ่อนคลายกล้ามเนื้อขา', sets: 1, reps: '3 นาที', hr: 'Cool-down', restSec: 0, cat: 'cardio' }
-                ]
-            },
-            0: {
-                short: 'อา.',
-                name: 'วันอาทิตย์',
-                title: 'พักเต็ม (Full Rest)',
-                subtitle: 'ไม่ซ้อม • นอน 7–8 ชม. และปรับคาร์บวันพัก',
-                type: 'rest',
-                exercises: [
-                    { id: 'sun-1', group: 'การนอนฟื้นฟู', name: 'นอนหลับให้ได้ 7–8 ชั่วโมงเต็ม', muscle: 'ฟื้นฟูระบบประสาทและรักษามวลกล้ามเนื้อ', sets: 1, reps: '7–8 ชม.', hr: 'Recovery', restSec: 0, cat: 'cardio' },
-                    { id: 'sun-2', group: 'ปรับคาร์บวันพัก', name: 'ลดข้าวมื้อเที่ยงเหลือ 150g + เพิ่มไข่เป็น 3 ฟอง', muscle: 'คาร์บลดเหลือ ~120g แคลอรีรวม ~1,800 kcal เท่าเดิม', sets: 1, reps: '160g โปรตีน', hr: 'Low Carb', restSec: 0, cat: 'isolation' },
-                    { id: 'sun-3', group: 'น้ำดื่มและใยอาหาร', name: 'ดื่มน้ำ 3 ลิตร + กินผักและใยอาหารให้เพียงพอ', muscle: 'ช่วยให้ระบบขับถ่ายปกติและลดบวมน้ำ', sets: 1, reps: '3.0 ลิตร', hr: 'Hydration', restSec: 0, cat: 'cardio' }
+                    { id: 'rs-1', group: 'การนอนฟื้นฟู', name: 'นอนหลับให้ได้ 7–8 ชั่วโมงเต็ม', muscle: 'ฟื้นฟูระบบประสาทและรักษามวลกล้ามเนื้อ', sets: 1, reps: '7–8 ชม.', hrText: 'Recovery', restSec: 0, cat: 'cardio' },
+                    { id: 'rs-2', group: 'ปรับคาร์บวันพัก', name: 'ลดข้าวมื้อเที่ยงเหลือ 150g + เพิ่มไข่เป็น 3 ฟอง', muscle: 'คาร์บ ~120g แคลอรีรวม ~1,800 kcal เท่าเดิม', sets: 1, reps: '160g โปรตีน', hrText: 'Low Carb', restSec: 0, cat: 'isolation' },
+                    { id: 'rs-3', group: 'น้ำดื่มและใยอาหาร', name: 'ดื่มน้ำ 3 ลิตร + กินผักและใยอาหารให้เพียงพอ', muscle: 'ช่วยให้ระบบขับถ่ายปกติและลดบวมน้ำ', sets: 1, reps: '3.0 ลิตร', hrText: 'Hydration', restSec: 0, cat: 'cardio' }
                 ]
             }
         };
@@ -903,44 +895,46 @@
         const realMealsList = [
             {
                 id: 'm-1',
-                header: 'มื้อที่ 1 • ตื่นเช้า',
-                protein: 45,
-                trainDesc: 'เวย์ชงฟิตเวย์ (ถั่ว 2 สกู๊ป) + อเมริกาโน่ไม่หวาน',
-                restDesc: 'เวย์ชงฟิตเวย์ (ถั่ว 2 สกู๊ป) + อเมริกาโน่ไม่หวาน',
+                header: 'มื้อที่ 1 • เช้า',
+                protein: 50,
+                kcal: 280,
+                trainDesc: 'Fitway Coconut 2 สกู๊ป (280 kcal / โปรตีน 50 g)',
+                restDesc: 'Fitway Coconut 2 สกู๊ป (280 kcal / โปรตีน 50 g)',
                 tip: 'เติมโปรตีนทันทีหลังตื่น สะดวกก่อนออกไปทำงาน'
             },
             {
                 id: 'm-2',
-                header: 'มื้อที่ 2 • 10:30 – 12:00 น. (มื้อทำงาน)',
+                header: 'มื้อที่ 2 • 10:30 (มื้อเที่ยง)',
                 protein: 40,
-                trainDesc: 'ข้าวเหนียวไก่ย่างลอกหนัง / กะเพราหมูสับผัดน้ำ / ปลากระป๋อง',
-                restDesc: 'ลดข้าวเหลือ 150g + เพิ่มไข่ต้มเป็น 3 ฟอง + กับข้าวโปรตีนสูง',
-                tip: 'เลี่ยงคอหมูย่างหรือเมนูติดมันจัด เพื่อคุมไขมันรวมไม่ให้เกิน 60g'
+                trainDesc: 'ข้าวเหนียวไก่ย่างลอกหนัง / ลาบหมู / กะเพรา',
+                restDesc: 'ลดข้าวเหลือ 150g + ไข่ต้ม 3 ฟอง: ไก่ย่างลอกหนัง / ลาบหมู / กะเพรา',
+                tip: 'เลี่ยงหนังไก่และเมนูติดมันจัด เพื่อคุมไขมันรวมไม่ให้เกิน 60g'
             },
             {
                 id: 'm-3',
-                header: 'มื้อที่ 3 • 15:30 น. (ก่อนซ้อม 1 ชม.)',
+                header: 'มื้อที่ 3 • 15:30 (ก่อนซ้อม)',
                 protein: 33,
-                trainDesc: 'กล้วยหอม 1 ลูก + โปรตีนขวด (~33 กรัม)',
-                restDesc: 'โปรตีนขวด (~33 กรัม) + ผลไม้หวานน้อยหรือถั่วเล็กน้อย',
+                trainDesc: 'กล้วย 1 ลูก + โปรตีนขวด (33 g)',
+                restDesc: 'โปรตีนขวด (33 g) + ผลไม้หวานน้อยหรือถั่วเล็กน้อย',
                 tip: 'ให้พลังงานก่อนเวทรอบเย็นและช่วยคุมความหิวช่วงบ่าย'
             },
             {
                 id: 'm-4',
-                header: 'มื้อที่ 4 • 19:30 – 20:00 น. (หลังซ้อม)',
+                header: 'มื้อที่ 4 • เย็น (หลังซ้อม)',
                 protein: 42,
-                trainDesc: 'สุกี้หมูเส้นน้อยพิเศษ + ไข่ขาวต้ม 3 ฟอง (หรือไก่ตุ๋น / ก๋วยเตี๋ยว)',
-                restDesc: 'สุกี้หมูเส้นน้อยพิเศษ + ไข่ขาวต้ม 3 ฟอง / ปลากระป๋อง + ผัก',
+                trainDesc: 'สุกี้หมูน้ำน้อย / ก๋วยเตี๋ยวหมูตุ๋น + ไข่ขาวต้ม',
+                restDesc: 'สุกี้หมูน้ำน้อย / ก๋วยเตี๋ยวหมูตุ๋น + ไข่ขาวต้ม',
                 tip: 'ระวังน้ำจิ้มสุกี้ราดเยอะและเลี่ยงน้ำมันเจียว/กากหมู'
             }
         ];
 
         const dailyRulesData = [
-            { id: 'rule-1', text: 'กินโปรตีนครบ 160g แบ่ง 4 มื้อ (มื้อละ 35–45g)' },
+            { id: 'rule-1', text: 'กินโปรตีนครบ 160g แบ่ง 4 มื้อ (มื้อละ ~33–50g)' },
             { id: 'rule-2', text: 'คุมพลังงาน ~1,800 kcal และห้ามกินต่ำกว่า 1,600 kcal/วัน' },
             { id: 'rule-3', text: 'ดื่มน้ำสะอาดครบ 3 ลิตร + กินผักและใยอาหารให้เพียงพอ' },
             { id: 'rule-4', text: 'นอนหลับอย่างน้อย 7 ชั่วโมงขึ้นไป (นอน 5–6 ชม. ทำให้น้ำหนักนิ่ง)' },
-            { id: 'rule-5', text: 'งดอกไก่ปั่นและขวด 600 ml ตามที่ตั้งใจไว้ (ใช้เมนูจริง 4 มื้อ)' }
+            { id: 'rule-5', text: 'งดอกไก่ปั่นและขวด 600 ml ตามที่ตั้งใจไว้ (ใช้เมนูจริง 4 มื้อ)' },
+            { id: 'rule-6', text: 'เดินให้ครบ 8,500 ก้าว/วัน' }
         ];
 
         // ============================================================
@@ -948,8 +942,6 @@
         // ============================================================
         const todayDateObj = new Date();
         const todayKey = todayDateObj.toISOString().split('T')[0];
-        let activeDayIndex = todayDateObj.getDay();
-        // activeDayIndex ใช้ getDay() ตามปกติ (0=อา, 1=จ, ...)
 
         const initialData = {
             theme: 'dark',
@@ -963,27 +955,82 @@
             exerciseMetrics: {},
             checkedMeals: {},
             checkedRules: {},
+            // คิวซ้อม (ไม่ผูกกับวันในสัปดาห์)
+            queueNext: 0,
+            queueLog: [],
+            lastLoad: {},
+            removedEx: {},
+            migratedV4: false,
+            // รีเซ็ตทุกวัน
+            sessionType: null,
+            quick: false,
+            gym: 'main',
+            swaps: {},
+            skipped: {},
+            doneToday: {},
+            noGym: false,
+            dismissed: {},
             weighIns: [
-                { date: '21/11/2026', weight: 82.40, fat: 20.8, muscle: 61.96, note: 'จุดเริ่มต้นเฟสลดไขมัน (-5.6 kg สู่เป้าแรก 76.8 kg)' }
+                { date: '28/11/2026', weight: 82.20, fat: 20.7, muscle: 61.90, protein: 14.8, bmr: 1777, visceral: 9, note: 'ลง 0.2 kg ใน 7 วัน (ไขมัน -0.1%, กล้ามเนื้อ -0.06 kg) ยังลงอยู่ ไม่ได้นิ่ง' },
+                { date: '21/11/2026', weight: 82.40, fat: 20.8, muscle: 61.96, protein: 14.9, bmr: 1779, visceral: 9, note: 'จุดเริ่มต้นเฟสลดไขมัน (-5.6 kg สู่เป้าแรก 76.8 kg)' }
             ]
         };
 
-        // localStorage with try/catch (artifact may block it)
+        // localStorage with try/catch
         let savedLocal = {};
         try { savedLocal = JSON.parse(localStorage.getItem('edward_fitness_app_v3')) || {}; } catch(e) {}
         let appData = { ...initialData, ...savedLocal };
 
-        // Auto reset daily counters if date changed
-        if (appData.lastDate !== todayKey) {
-            appData.lastDate = todayKey;
+        function resetDailyFields() {
             appData.steps = 0;
             appData.waterMl = 0;
             appData.proteinG = 0;
             appData.completedSets = {};
+            appData.exerciseMetrics = {};
             appData.checkedMeals = {};
             appData.checkedRules = {};
+            appData.sessionType = null;
+            appData.quick = false;
+            appData.gym = 'main';
+            appData.swaps = {};
+            appData.skipped = {};
+            appData.doneToday = {};
+            appData.noGym = false;
+            appData.dismissed = {};
+        }
+
+        // Auto reset daily counters if date changed
+        if (appData.lastDate !== todayKey) {
+            appData.lastDate = todayKey;
+            resetDailyFields();
             persistData();
         }
+
+        // One-time migration: ย้ายน้ำหนักที่เคยกรอกจากแผนรายวันเดิม + ใส่ค่าเริ่มต้นจากยิมจริง
+        (function migrateV4() {
+            if (appData.migratedV4) return;
+            const map = {
+                'mon-1': 'pull-1', 'mon-2': 'pull-2', 'mon-3': 'pull-3', 'mon-4': 'pull-5', 'mon-6': 'leg-5',
+                'tue-1': 'push-1', 'tue-2': 'push-2', 'tue-3': 'push-3', 'tue-4': 'push-5', 'tue-5': 'push-6', 'tue-6': 'leg-4',
+                'thu-3': 'pull-4', 'thu-4': 'pull-6', 'fri-1': 'push-4', 'fri-5': 'push-7'
+            };
+            appData.lastLoad = appData.lastLoad || {};
+            const oldMetrics = appData.exerciseMetrics || {};
+            Object.keys(map).forEach(old => {
+                const m = oldMetrics[old];
+                const nk = map[old] + '|';
+                if (m && m.weight && !appData.lastLoad[nk]) appData.lastLoad[nk] = { weight: m.weight, reps: m.reps || '' };
+            });
+            const seeds = { 'leg-1|': { weight: 100, reps: '', label: '80 / 100 kg' }, 'leg-2|': { weight: 100, reps: '' }, 'leg-3|': { weight: 70, reps: '' } };
+            Object.keys(seeds).forEach(k => { if (!appData.lastLoad[k]) appData.lastLoad[k] = seeds[k]; });
+            appData.exerciseMetrics = {};
+            if (!Array.isArray(appData.weighIns) || appData.weighIns.length === 0) appData.weighIns = initialData.weighIns;
+            if (!appData.weighIns.some(w => w.date === '28/11/2026')) appData.weighIns.unshift(initialData.weighIns[0]);
+            const extra = { '21/11/2026': { protein: 14.9, bmr: 1779, visceral: 9 }, '28/11/2026': { protein: 14.8, bmr: 1777, visceral: 9 } };
+            appData.weighIns.forEach(w => { if (extra[w.date] && typeof w.bmr !== 'number') Object.assign(w, extra[w.date]); });
+            appData.migratedV4 = true;
+            persistData();
+        })();
 
         function persistData() {
             try { localStorage.setItem('edward_fitness_app_v3', JSON.stringify(appData)); } catch(e) {}
@@ -1102,162 +1149,440 @@
         }
 
         // ============================================================
-        // 5. WORKOUT SCHEDULE & SET LOGGING
+        // 5. WORKOUT QUEUE & SET LOGGING (คิวซ้อม ไม่ผูกกับวัน)
         // ============================================================
+        const ICON_CHECK = '<svg class="w-3 h-3 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        function currentSessionKey() {
+            return appData.sessionType || QUEUE[(appData.queueNext || 0) % QUEUE.length];
+        }
+        function sessionMacroMode() {
+            return sessionDefs[currentSessionKey()].type === 'weight' ? 'train' : 'rest';
+        }
+        function exVariant(ex) {
+            if (appData.gym === 'other' && ex.other) return 'o';
+            if (appData.swaps[ex.id] && ex.alt) return 's';
+            return '';
+        }
+        function resolveEx(ex) {
+            const v = exVariant(ex);
+            let name = ex.name, tag = '';
+            if (v === 'o') { name = ex.other; tag = 'ยิมอื่น'; }
+            else if (v === 's') { name = ex.alt; tag = 'สลับชั่วคราว'; }
+            return { ...ex, name, tag, variant: v, key: ex.id + '|' + v };
+        }
+        function domId(s) { return String(s).replace(/[^a-zA-Z0-9_-]/g, '_'); }
+
+        function findExercise(exId) {
+            for (const k of Object.keys(sessionDefs)) {
+                const hit = sessionDefs[k].exercises.find(e => e.id === exId);
+                if (hit) return resolveEx(hit);
+            }
+            return null;
+        }
+
+        function visibleExercises(sess) {
+            let list = sess.exercises.filter(e => !appData.removedEx[e.id]);
+            if (sess.type === 'weight' && appData.quick) {
+                list = list.filter(e => e.core || e.cardio).map(e => e.cardio
+                    ? { ...e, mins: 10, name: 'เดินชัน 10 นาที (ชัน 8–10% / 4.0 km/h)', reps: '10 นาที' }
+                    : e);
+            }
+            return list.map(resolveEx);
+        }
+
         function renderDaySelector() {
-            const orderedDays = [1, 2, 3, 4, 5, 6, 0];
             const bar = document.getElementById('day-pills-bar');
-            bar.innerHTML = orderedDays.map(d => {
-                const info = workoutPlan[d];
-                const isSelected = d === activeDayIndex;
+            const cur = currentSessionKey();
+            const nextKey = QUEUE[(appData.queueNext || 0) % QUEUE.length];
+            const chips = [['PUSH', 'PUSH'], ['PULL', 'PULL'], ['LEG', 'LEG'], ['CARDIO', 'เดินชัน'], ['REST', 'พัก']];
+            bar.innerHTML = chips.map(([k, label]) => {
+                const sel = k === cur;
+                const isNext = k === nextKey;
+                const done = !!appData.doneToday[k];
                 return `
-                    <button onclick="selectWorkoutDay(${d})" class="flex-1 min-w-[44px] py-2.5 rounded-xl font-bold text-xs transition active:scale-95 ${
-                        isSelected
-                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
-                        : 'glass-card text-slate-500 dark:text-slate-400 hover:border-emerald-500/40'
-                    }">
-                        ${info.short}
+                    <button onclick="selectSession('${k}')" class="flex-1 min-w-[58px] py-2 rounded-xl font-bold text-xs transition active:scale-95 ${
+                        sel ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
+                            : 'glass-card text-slate-500 dark:text-slate-400 hover:border-emerald-500/40'
+                    } ${isNext && !sel ? 'border-emerald-500/60' : ''}">
+                        <span class="block">${label}${done ? ' ' + ICON_CHECK : ''}</span>
+                        <span class="block text-[9px] font-semibold ${sel ? 'opacity-90' : 'text-emerald-500'}">${isNext ? 'คิวถัดไป' : '&nbsp;'}</span>
                     </button>
                 `;
             }).join('');
         }
 
-        function selectWorkoutDay(d) {
-            activeDayIndex = d;
+        function refreshWorkoutUI() {
             renderDaySelector();
             renderWorkoutExercises();
-            const macroMode = workoutPlan[d].type === 'weight' ? 'train' : 'rest';
-            switchMacroDay(macroMode, false);
         }
 
-        function toggleSetButton(exId, setIndex, totalSets, restSec, cat) {
-            if (!appData.completedSets[exId]) {
-                appData.completedSets[exId] = Array(totalSets).fill(false);
-            }
-            const nextState = !appData.completedSets[exId][setIndex];
-            appData.completedSets[exId][setIndex] = nextState;
+        function selectSession(k) {
+            appData.sessionType = k;
+            persistData();
+            refreshWorkoutUI();
+            switchMacroDay(sessionMacroMode(), false);
+        }
+
+        function toggleQuick() {
+            appData.quick = !appData.quick;
             persistData();
             renderWorkoutExercises();
+            showToast(appData.quick ? 'โหมดรีบ: เหลือท่าหลัก + เดินชัน 10 นาที' : 'กลับเป็นโหมดปกติ');
+        }
 
-            if (nextState && restSec > 0) {
-                const tag = cat === 'compound' ? 'Compound • HR ≤ 120 bpm' : 'Isolation • HR ≤ 110 bpm';
-                startRestCountdown(restSec, tag);
-                showToast(`จบเซ็ต ${setIndex + 1} • เริ่มจับเวลาพัก ${restSec} วิ`);
+        function setGym(mode) {
+            appData.gym = mode;
+            persistData();
+            renderWorkoutExercises();
+            showToast(mode === 'other' ? 'ยิมอื่น: เปลี่ยนเป็นท่าดัมเบล / บอดี้เวท' : 'ยิมหลัก (Express)');
+        }
+
+        function finishQueue() {
+            const key = currentSessionKey();
+            const qi = QUEUE.indexOf(key);
+            if (qi === -1) return;
+            appData.queueLog = appData.queueLog || [];
+            if (appData.doneToday[key]) {
+                delete appData.doneToday[key];
+                appData.queueNext = qi;
+                const idx = appData.queueLog.findIndex(l => l.date === todayKey && l.type === key);
+                if (idx !== -1) appData.queueLog.splice(idx, 1);
+                showToast(`ยกเลิกการติ๊กคิว ${key}`);
+            } else {
+                appData.doneToday[key] = true;
+                appData.queueLog.unshift({ date: todayKey, type: key });
+                appData.queueLog = appData.queueLog.slice(0, 60);
+                appData.queueNext = (qi + 1) % QUEUE.length;
+                showToast(`จบคิว ${key} • คิวถัดไป: ${QUEUE[appData.queueNext]}`);
+            }
+            persistData();
+            refreshWorkoutUI();
+        }
+
+        function weekQueueCount() {
+            const since = new Date(Date.now() - 6 * 86400000).toISOString().split('T')[0];
+            return (appData.queueLog || []).filter(l => l.date >= since).length;
+        }
+
+        function restTag(rx) {
+            return `${rx.cat === 'compound' ? 'Compound' : 'Isolation'} • HR ≤ ${rx.hrMax} bpm`;
+        }
+
+        function persistLastLoad(rx) {
+            const m = appData.exerciseMetrics[rx.key];
+            if (m && m.weight !== '' && m.weight !== undefined) {
+                appData.lastLoad[rx.key] = { weight: m.weight, reps: m.reps || '' };
             }
         }
 
-        function updateExerciseMetric(exId, key, val) {
-            if (!appData.exerciseMetrics[exId]) {
-                appData.exerciseMetrics[exId] = { weight: '', reps: '' };
-            }
-            appData.exerciseMetrics[exId][key] = val;
+        function logSet(exId) {
+            const rx = findExercise(exId);
+            if (!rx) return;
+            const arr = appData.completedSets[exId] || Array(rx.sets).fill(false);
+            const idx = arr.indexOf(false);
+            if (idx === -1) { showToast('ครบทุกเซ็ตแล้ว'); return; }
+            arr[idx] = true;
+            appData.completedSets[exId] = arr;
+            persistLastLoad(rx);
             persistData();
+            renderWorkoutExercises();
+            if (rx.restSec > 0 && idx < rx.sets - 1) {
+                startRestCountdown(rx.restSec, restTag(rx));
+                showToast(`จบเซ็ต ${idx + 1} • พักจน HR ≤ ${rx.hrMax} (จับเวลา ${rx.restSec} วิ ที่แท็บจับเวลา)`);
+            } else {
+                showToast(`จบเซ็ต ${idx + 1}`);
+            }
+        }
+
+        function toggleSetDot(exId, i) {
+            const rx = findExercise(exId);
+            if (!rx) return;
+            const arr = appData.completedSets[exId] || Array(rx.sets).fill(false);
+            arr[i] = !arr[i];
+            appData.completedSets[exId] = arr;
+            if (arr[i]) persistLastLoad(rx);
+            persistData();
+            renderWorkoutExercises();
+        }
+
+        function toggleCardioDone(exId) {
+            const cur = (appData.completedSets[exId] || [false])[0];
+            appData.completedSets[exId] = [!cur];
+            persistData();
+            renderWorkoutExercises();
+        }
+
+        function getMetric(key) {
+            return appData.exerciseMetrics[key] || { weight: '', reps: '' };
+        }
+        function setMetric(key, field, val) {
+            const m = { ...getMetric(key) };
+            m[field] = val;
+            appData.exerciseMetrics[key] = m;
+            persistData();
+        }
+        function adjustWeight(key, delta) {
+            const cur = parseFloat(getMetric(key).weight);
+            const base = isNaN(cur) ? (appData.lastLoad[key] ? parseFloat(appData.lastLoad[key].weight) || 0 : 0) : cur;
+            const next = Math.max(0, +(base + delta).toFixed(1));
+            setMetric(key, 'weight', String(next));
+            renderWorkoutExercises();
+        }
+        function typeWeight(key, val) {
+            setMetric(key, 'weight', val);
+        }
+        function setReps(key, n) {
+            setMetric(key, 'reps', String(n));
+            renderWorkoutExercises();
+        }
+        function useLastLoad(key) {
+            const last = appData.lastLoad[key];
+            if (!last) return;
+            appData.exerciseMetrics[key] = { weight: String(last.weight), reps: String(last.reps || '') };
+            persistData();
+            renderWorkoutExercises();
+            showToast(`ใช้ ${last.weight} kg เท่าเดิม`);
+        }
+
+        function checkHR(exId, val, max) {
+            const el = document.getElementById('hrs-' + domId(exId));
+            if (!el) return;
+            const v = parseInt(val, 10);
+            if (isNaN(v)) {
+                el.className = 'text-[11px] text-slate-400';
+                el.textContent = `พักจน HR ≤ ${max}`;
+            } else if (v <= max) {
+                el.className = 'text-[11px] font-bold text-emerald-500';
+                el.textContent = 'พร้อมเริ่มเซ็ตต่อไป';
+            } else {
+                el.className = 'text-[11px] font-bold text-amber-500';
+                el.textContent = `พักต่อ (สูงกว่าเป้า ${v - max} bpm)`;
+            }
+        }
+
+        // ---- เครื่องไม่ว่าง / ข้าม / ตัดถาวร ----
+        let equipExId = null;
+        function openEquipModal(exId) {
+            const rx = findExercise(exId);
+            if (!rx) return;
+            equipExId = exId;
+            const base = sessionDefs[Object.keys(sessionDefs).find(k => sessionDefs[k].exercises.some(e => e.id === exId))].exercises.find(e => e.id === exId);
+            const swapped = !!appData.swaps[exId];
+            let html = `<h3 class="font-bold text-base">${base.name}</h3><p class="text-xs text-slate-400">เครื่องไม่ว่าง หรือไม่มีเครื่องนี้ที่ยิม?</p>`;
+            if (appData.gym === 'other') {
+                html += `<p class="text-xs text-amber-500">โหมดยิมอื่นกำลังใช้ท่า: ${rx.name}</p>`;
+            } else if (base.alt && !swapped) {
+                html += `<button onclick="swapEx('${exId}')" class="w-full text-left p-3 rounded-xl bg-emerald-600 text-white font-bold text-sm">สลับเป็น ${base.alt}<span class="block text-[11px] font-normal opacity-90">ชั่วคราวเฉพาะวันนี้</span></button>`;
+            } else if (swapped) {
+                html += `<button onclick="unswapEx('${exId}')" class="w-full text-left p-3 rounded-xl bg-emerald-600 text-white font-bold text-sm">กลับไปใช้เครื่องเดิม</button>`;
+            }
+            html += `<button onclick="skipEx('${exId}')" class="w-full text-left p-3 rounded-xl sub-box font-semibold text-sm">ข้ามท่านี้วันนี้<span class="block text-[11px] font-normal text-slate-400">ไม่นับเป็นท่าที่ไม่ครบ กลับมาเล่นทีหลังได้</span></button>`;
+            html += `<button onclick="removeExPermanent('${exId}')" class="w-full text-left p-3 rounded-xl sub-box font-semibold text-sm text-rose-500">ตัดท่านี้ออกจากแผนถาวร<span class="block text-[11px] font-normal text-slate-400">ไม่ชอบ / ไม่มีเครื่อง (คืนได้ที่ท้ายหน้า)</span></button>`;
+            html += `<button onclick="closeEquipModal()" class="w-full py-2.5 rounded-xl sub-box text-sm font-semibold">ปิด</button>`;
+            document.getElementById('equip-modal-body').innerHTML = html;
+            document.getElementById('modal-equip').classList.remove('hidden');
+        }
+        function closeEquipModal() {
+            document.getElementById('modal-equip').classList.add('hidden');
+            equipExId = null;
+        }
+        function swapEx(id) { appData.swaps[id] = true; persistData(); closeEquipModal(); renderWorkoutExercises(); showToast('สลับท่าแล้ว'); }
+        function unswapEx(id) { delete appData.swaps[id]; persistData(); closeEquipModal(); renderWorkoutExercises(); }
+        function skipEx(id) { appData.skipped[id] = true; persistData(); closeEquipModal(); renderWorkoutExercises(); showToast('ข้ามท่านี้แล้ว'); }
+        function unskipEx(id) { delete appData.skipped[id]; persistData(); renderWorkoutExercises(); }
+        function removeExPermanent(id) { appData.removedEx[id] = true; persistData(); closeEquipModal(); renderWorkoutExercises(); showToast('ตัดท่านี้ออกจากแผนแล้ว'); }
+        function restoreRemoved() { appData.removedEx = {}; persistData(); renderWorkoutExercises(); showToast('คืนท่าที่ตัดทั้งหมดแล้ว'); }
+
+        function exerciseCardHTML(rx) {
+            const did = domId(rx.id);
+            if (appData.skipped[rx.id]) {
+                return `
+                    <div class="glass-card rounded-2xl p-3.5 flex items-center justify-between gap-2 opacity-60">
+                        <div class="min-w-0">
+                            <span class="text-[11px] font-bold text-slate-400 block">${rx.group} • ข้ามวันนี้</span>
+                            <span class="text-sm font-semibold line-through text-slate-400">${rx.name}</span>
+                        </div>
+                        <button onclick="unskipEx('${rx.id}')" class="px-3 py-2 rounded-lg sub-box text-xs font-bold flex-shrink-0">กลับมาเล่น</button>
+                    </div>`;
+            }
+
+            const setsState = appData.completedSets[rx.id] || Array(rx.sets).fill(false);
+            const doneCount = setsState.filter(Boolean).length;
+            const allDone = doneCount >= rx.sets;
+            const pill = rx.cat === 'compound' ? 'bg-amber-500/12 text-amber-500' : rx.cat === 'isolation' ? 'bg-cyan-500/12 text-cyan-500' : 'bg-emerald-500/12 text-emerald-500';
+            const tagHtml = rx.tag ? `<span class="ml-1.5 px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 text-[10px] font-bold">${rx.tag}</span>` : '';
+
+            if (!rx.hrMax) {
+                const isWalk = !!rx.cardio;
+                return `
+                    <div class="glass-card rounded-2xl p-4 space-y-3 ${allDone ? 'opacity-70 border-emerald-500/30' : ''}">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="min-w-0">
+                                <span class="text-[11px] font-bold text-emerald-500 block">${rx.group}</span>
+                                <h3 class="font-bold text-sm mt-0.5 ${allDone ? 'line-through text-slate-400' : ''}">${rx.name}</h3>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${rx.muscle} • <span class="font-semibold">${rx.reps}</span></p>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex-shrink-0 ${pill}">${rx.hrText || ''}</span>
+                        </div>
+                        <div class="flex gap-2 pt-2 border-t border-slate-500/10">
+                            ${isWalk ? `<button onclick="jumpToTreadmill(${rx.mins})" class="flex-1 py-3 rounded-xl sub-box text-sm font-bold active:scale-95 transition">เปิดโค้ชเดินชัน</button>` : ''}
+                            <button onclick="toggleCardioDone('${rx.id}')" class="flex-1 py-3 rounded-xl text-sm font-bold active:scale-95 transition ${allDone ? 'bg-emerald-600 text-white' : 'bg-emerald-600/15 text-emerald-500'}">${allDone ? 'ทำแล้ว (กดเพื่อยกเลิก)' : 'ทำแล้ว'}</button>
+                            ${isWalk ? `<button onclick="skipEx('${rx.id}')" class="px-4 py-3 rounded-xl sub-box text-sm font-semibold">ข้าม</button>` : ''}
+                        </div>
+                    </div>`;
+            }
+
+            const metric = getMetric(rx.key);
+            const last = appData.lastLoad[rx.key];
+            const showLast = last && String(last.weight) !== String(metric.weight);
+            const lastText = last ? `${last.label || last.weight + ' kg'}${last.reps ? ' × ' + last.reps : ''}` : '';
+            const dots = setsState.map((on, i) => `<button onclick="toggleSetDot('${rx.id}', ${i})" aria-label="เซ็ต ${i + 1}" class="w-7 h-7 rounded-full text-[11px] font-mono font-bold flex items-center justify-center transition ${on ? 'bg-emerald-600 text-white' : 'sub-box text-slate-400'}">${on ? ICON_CHECK : i + 1}</button>`).join('');
+            const repChips = [8, 10, 12, 15].map(n => `<button onclick="setReps('${rx.key}', ${n})" class="flex-1 py-2 rounded-lg font-mono font-bold text-xs active:scale-95 transition ${String(metric.reps) === String(n) ? 'bg-emerald-600 text-white' : 'sub-box text-slate-500 dark:text-slate-300'}">${n}</button>`).join('');
+
+            return `
+                <div class="glass-card rounded-2xl p-4 space-y-3 ${allDone ? 'opacity-75 border-emerald-500/30' : ''}">
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="min-w-0">
+                            <span class="text-[11px] font-bold text-emerald-500 block">${rx.group}</span>
+                            <h3 class="font-bold text-sm sm:text-base mt-0.5 ${allDone ? 'line-through text-slate-400' : ''}">${rx.name}${tagHtml}</h3>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${rx.muscle} • <span class="font-semibold">${rx.sets} เซ็ต × ${rx.reps}</span></p>
+                        </div>
+                        <button onclick="jumpToRest('${rx.id}')" class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex items-center gap-1 flex-shrink-0 active:scale-95 transition ${pill}">
+                            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/></svg>
+                            HR ≤ ${rx.hrMax}
+                        </button>
+                    </div>
+
+                    ${showLast ? `<button onclick="useLastLoad('${rx.key}')" class="w-full py-2.5 rounded-xl bg-amber-500/12 text-amber-500 font-bold text-xs active:scale-95 transition">ครั้งก่อน ${lastText} — กดใช้เท่าเดิม</button>` : ''}
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="adjustWeight('${rx.key}', -2.5)" aria-label="ลดน้ำหนัก" class="w-12 h-12 rounded-xl sub-box text-xl font-bold active:scale-95 transition">−</button>
+                        <div class="flex-1 flex items-center justify-center sub-box rounded-xl h-12 px-2">
+                            <input type="number" inputmode="decimal" step="0.5" value="${metric.weight}" onchange="typeWeight('${rx.key}', this.value)" placeholder="0" class="w-16 bg-transparent text-center font-mono font-extrabold text-xl focus:outline-none">
+                            <span class="text-xs text-slate-400">kg</span>
+                        </div>
+                        <button onclick="adjustWeight('${rx.key}', 2.5)" aria-label="เพิ่มน้ำหนัก" class="w-12 h-12 rounded-xl sub-box text-xl font-bold active:scale-95 transition">+</button>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[11px] text-slate-400 w-8">เรป</span>
+                        ${repChips}
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-1.5 flex-wrap">${dots}</div>
+                        <button onclick="logSet('${rx.id}')" ${allDone ? 'disabled' : ''} class="px-5 py-3 rounded-xl font-bold text-sm active:scale-95 transition ${allDone ? 'bg-emerald-600/20 text-emerald-500' : 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'}">${allDone ? 'ครบแล้ว' : `+1 เซ็ต (${doneCount}/${rx.sets})`}</button>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-500/10">
+                        <div class="flex items-center gap-2">
+                            <input type="number" inputmode="numeric" placeholder="HR" oninput="checkHR('${rx.id}', this.value, ${rx.hrMax})" class="w-14 px-2 py-1.5 rounded-lg sub-box text-center font-mono font-bold text-xs focus:outline-none">
+                            <span id="hrs-${did}" class="text-[11px] text-slate-400">พักจน HR ≤ ${rx.hrMax}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openEquipModal('${rx.id}')" class="px-2.5 py-1.5 rounded-lg sub-box text-[11px] font-semibold">เครื่องไม่ว่าง</button>
+                            <button onclick="skipEx('${rx.id}')" class="px-2.5 py-1.5 rounded-lg sub-box text-[11px] font-semibold">ข้าม</button>
+                        </div>
+                    </div>
+                </div>`;
         }
 
         function renderWorkoutExercises() {
-            const dayObj = workoutPlan[activeDayIndex];
+            const key = currentSessionKey();
+            const sess = sessionDefs[key];
             const container = document.getElementById('session-exercises-wrapper');
+            const list = visibleExercises(sess);
 
-            let totalSets = 0;
-            let doneSets = 0;
-            dayObj.exercises.forEach(ex => {
-                totalSets += ex.sets;
-                const arr = appData.completedSets[ex.id] || [];
-                doneSets += arr.filter(Boolean).length;
+            let totalSets = 0, doneSets = 0;
+            list.forEach(rx => {
+                if (appData.skipped[rx.id]) return;
+                totalSets += rx.sets;
+                doneSets += (appData.completedSets[rx.id] || []).filter(Boolean).length;
             });
-            const progressPct = totalSets > 0 ? Math.round((doneSets / totalSets) * 100) : 0;
+            const pct = totalSets > 0 ? Math.round((doneSets / totalSets) * 100) : 0;
+            const isQueue = QUEUE.includes(key);
+            const nextKey = QUEUE[(appData.queueNext || 0) % QUEUE.length];
+            const isOther = appData.gym === 'other';
 
             let html = `
-                <div class="glass-card rounded-2xl p-4 space-y-2.5">
+                <div class="glass-card rounded-2xl p-4 space-y-3">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 font-bold text-[11px]">${dayObj.name}</span>
-                        <span class="font-mono font-bold text-xs text-emerald-500">${doneSets}/${totalSets} เซ็ต (${progressPct}%)</span>
+                        <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 font-bold text-[11px]">${sess.name}${isQueue && key === nextKey ? ' • คิวถัดไป' : ''}</span>
+                        <span class="font-mono font-bold text-xs text-emerald-500">${doneSets}/${totalSets} เซ็ต (${pct}%)</span>
                     </div>
                     <div>
-                        <h2 class="text-base sm:text-lg font-extrabold tracking-tight">${dayObj.title}</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">${dayObj.subtitle}</p>
+                        <h2 class="text-base sm:text-lg font-extrabold tracking-tight">${sess.title}</h2>
+                        ${sess.type === 'weight' ? `<p class="text-[11px] font-semibold text-emerald-500">7 วันล่าสุด: ${weekQueueCount()}/4 คิว • เล่นวันไหนก็ได้ ขอแค่ครบ 4 คิว</p>` : ''}
+                        <p class="text-xs text-slate-500 dark:text-slate-400">${appData.quick && sess.type === 'weight' ? 'โหมดรีบ ~30 นาที: ท่าหลัก + เดินชัน 10 นาที' : sess.subtitle}</p>
                     </div>
                     <div class="w-full h-1.5 rounded-full sub-box overflow-hidden">
-                        <div class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                        <div class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
                     </div>
+                    ${sess.type === 'weight' ? `
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="toggleQuick()" class="py-2.5 rounded-xl text-xs font-bold active:scale-95 transition ${appData.quick ? 'bg-amber-500 text-white' : 'sub-box text-slate-600 dark:text-slate-300'}">${appData.quick ? 'โหมดรีบ: เปิดอยู่' : 'โหมดรีบ 30 นาที'}</button>
+                        <div class="grid grid-cols-2 gap-1 p-1 rounded-xl sub-box">
+                            <button onclick="setGym('main')" class="py-1.5 rounded-lg text-xs font-bold transition ${!isOther ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}">ยิมหลัก</button>
+                            <button onclick="setGym('other')" class="py-1.5 rounded-lg text-xs font-bold transition ${isOther ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400'}">ยิมอื่น</button>
+                        </div>
+                    </div>` : ''}
                 </div>
             `;
 
-            dayObj.exercises.forEach((ex, i) => {
-                const setsState = appData.completedSets[ex.id] || Array(ex.sets).fill(false);
-                const allDone = setsState.length > 0 && setsState.every(Boolean);
-                const metric = appData.exerciseMetrics[ex.id] || { weight: '', reps: '' };
-                const showInputs = dayObj.type === 'weight' && ex.cat !== 'cardio';
+            html += list.map(exerciseCardHTML).join('');
 
-                let pillStyle = 'bg-emerald-500/12 text-emerald-500';
-                if (ex.cat === 'compound') pillStyle = 'bg-amber-500/12 text-amber-500';
-                if (ex.cat === 'isolation') pillStyle = 'bg-cyan-500/12 text-cyan-500';
-
-                let setButtons = '';
-                for (let s = 0; s < ex.sets; s++) {
-                    const checked = !!setsState[s];
-                    const label = ex.sets === 1 ? 'สำเร็จ' : `S${s + 1}`;
-                    setButtons += `
-                        <button onclick="toggleSetButton('${ex.id}', ${s}, ${ex.sets}, ${ex.restSec}, '${ex.cat}')"
-                            class="px-3 py-1.5 rounded-lg font-mono font-bold text-xs transition active:scale-90 flex items-center gap-1 ${
-                                checked
-                                ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30'
-                                : 'sub-box text-slate-600 dark:text-slate-300 hover:border-emerald-500/50'
-                            }">
-                            ${checked ? '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
-                            <span>${label}</span>
-                        </button>
-                    `;
-                }
-
-                html += `
-                    <div class="glass-card rounded-2xl p-4 space-y-3 reveal-item ${allDone ? 'opacity-70 border-emerald-500/30' : ''}" style="animation-delay: ${i * 0.035}s">
-                        <div class="flex items-start justify-between gap-2">
-                            <div>
-                                <span class="text-[11px] font-bold text-emerald-500 block">${ex.group}</span>
-                                <h3 class="font-bold text-sm sm:text-base mt-0.5 ${allDone ? 'line-through text-slate-400' : ''}">${ex.name}</h3>
-                                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">${ex.muscle} • <span class="font-semibold">${ex.sets > 1 ? ex.sets + ' เซ็ต × ' : ''}${ex.reps}</span></p>
-                            </div>
-                            ${ex.restSec > 0 ? `
-                                <button onclick="jumpToRest('${ex.restSec}', '${ex.cat}')" class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex items-center gap-1 flex-shrink-0 active:scale-95 transition ${pillStyle}">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/></svg>
-                                    ${ex.hr}
-                                </button>
-                            ` : `
-                                <span class="px-2.5 py-1 rounded-lg font-mono font-bold text-[11px] flex-shrink-0 ${pillStyle}">${ex.hr}</span>
-                            `}
-                        </div>
-
-                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-500/10">
-                            <div class="flex flex-wrap items-center gap-1.5">
-                                ${setButtons}
-                            </div>
-
-                            ${showInputs ? `
-                                <div class="flex items-center gap-1.5">
-                                    <div class="flex items-center sub-box rounded-lg px-2 py-1">
-                                        <input type="number" step="0.5" value="${metric.weight}" onchange="updateExerciseMetric('${ex.id}', 'weight', this.value)" placeholder="0" class="w-11 bg-transparent text-right font-mono font-bold text-xs focus:outline-none">
-                                        <span class="text-[10px] text-slate-400 ml-1">kg</span>
-                                    </div>
-                                    <div class="flex items-center sub-box rounded-lg px-2 py-1">
-                                        <input type="number" value="${metric.reps}" onchange="updateExerciseMetric('${ex.id}', 'reps', this.value)" placeholder="12" class="w-8 bg-transparent text-right font-mono font-bold text-xs focus:outline-none">
-                                        <span class="text-[10px] text-slate-400 ml-1">เรป</span>
-                                    </div>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-            });
+            if (isQueue) {
+                const done = !!appData.doneToday[key];
+                const nx = QUEUE[(QUEUE.indexOf(key) + 1) % QUEUE.length];
+                html += `<button onclick="finishQueue()" class="w-full py-3.5 rounded-2xl font-bold text-sm active:scale-98 transition ${done ? 'sub-box text-slate-500' : 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/25'}">${done ? 'ยกเลิกการติ๊กคิวนี้' : `จบคิว ${key} • ไปคิวถัดไป (${nx})`}</button>`;
+            }
+            const removedCount = Object.keys(appData.removedEx || {}).length;
+            if (removedCount > 0) {
+                html += `<button onclick="restoreRemoved()" class="w-full text-center text-[11px] text-slate-400 underline py-1">คืนท่าที่ตัดถาวร (${removedCount} ท่า)</button>`;
+            }
 
             container.innerHTML = html;
+            renderReminder();
         }
 
-        function jumpToRest(secStr, cat) {
-            const sec = parseInt(secStr, 10);
+        function jumpToRest(exId) {
+            const rx = findExercise(exId);
+            if (!rx) return;
             switchMainTab('timer', 1);
-            const tag = cat === 'compound' ? 'Compound • HR ≤ 120 bpm' : 'Isolation • HR ≤ 110 bpm';
-            startRestCountdown(sec, tag);
+            startRestCountdown(rx.restSec || 60, restTag(rx));
+        }
+
+        function jumpToTreadmill(mins) {
+            switchMainTab('timer', 1);
+            switchTreadmillMode(mins);
+        }
+
+        // ---- เตือนตามชีวิตจริง (แสดงในแอปตอนเปิดอยู่ ไม่เตือนซ้ำถ้าปิดแล้ว) ----
+        function mealProtein(id) { return realMealsList.find(m => m.id === id).protein; }
+        function dismissReminder(k) { appData.dismissed[k] = true; persistData(); renderReminder(); }
+        function skipGymToday() { appData.noGym = true; persistData(); renderReminder(); showToast('โอเค วันนี้พักได้ ไม่ต้องรู้สึกผิด'); }
+
+        function renderReminder() {
+            const el = document.getElementById('smart-reminder');
+            if (!el) return;
+            const now = new Date();
+            const mins = now.getHours() * 60 + now.getMinutes();
+            const anySet = Object.values(appData.completedSets || {}).some(a => a.some(Boolean));
+            const wSession = sessionDefs[currentSessionKey()].type === 'weight';
+            let r = null;
+            if (mins >= 630 && mins < 780 && !appData.checkedMeals['m-2']) {
+                r = { k: 'lunch', text: 'ถึงเวลามื้อเที่ยงแล้ว (10:30): ข้าวเหนียวไก่ย่างลอกหนัง / ลาบหมู / กะเพรา', act: `toggleMealItem('m-2', ${mealProtein('m-2')}); renderReminder()`, label: 'กินแล้ว' };
+            } else if (mins >= 930 && mins < 990 && !appData.checkedMeals['m-3']) {
+                r = { k: 'snack', text: 'ถึงเวลา 15:30: กล้วย + โปรตีนขวด 33 g', act: `toggleMealItem('m-3', ${mealProtein('m-3')}); renderReminder()`, label: 'กินแล้ว' };
+            } else if (mins >= 990 && mins < 1200 && wSession && !anySet && !appData.noGym) {
+                r = { k: 'gym', text: `16:30 แล้ว ได้เวลาไปยิม • คิวถัดไป: ${QUEUE[(appData.queueNext || 0) % QUEUE.length]}`, act: 'skipGymToday()', label: 'วันนี้ไม่ไป' };
+            }
+            if (!r || appData.dismissed[r.k]) { el.classList.add('hidden'); el.innerHTML = ''; return; }
+            el.classList.remove('hidden');
+            el.innerHTML = `
+                <span class="flex-1 text-xs font-semibold">${r.text}</span>
+                <button onclick="${r.act}" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold flex-shrink-0">${r.label}</button>
+                <button onclick="dismissReminder('${r.k}')" aria-label="ปิด" class="p-1 text-slate-400 flex-shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
         }
 
         function toggleVolumeDrawer() {
@@ -1378,6 +1703,9 @@
         let tmRunning = false;
 
         const tmPhasesData = {
+            10: [
+                { start: 0, end: 10, title: 'เดินชันโหมดรีบ (คุม HR 110–125)', incline: '10%', speed: '4.0 km/h' }
+            ],
             20: [
                 { start: 0, end: 20, title: 'เดินชันต่อเนื่องหลังเวท', incline: '10%', speed: '4.0 km/h' }
             ],
@@ -1393,12 +1721,11 @@
         function switchTreadmillMode(mins) {
             tmModeMins = mins;
             resetTreadmillRun();
-            document.getElementById('tm-mode-20').className = mins === 20
-                ? 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition'
-                : 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
-            document.getElementById('tm-mode-60').className = mins === 60
-                ? 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition'
-                : 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+            [10, 20, 60].forEach(m => {
+                document.getElementById('tm-mode-' + m).className = mins === m
+                    ? 'py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white transition'
+                    : 'py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 transition';
+            });
             renderTreadmillCoach();
         }
 
@@ -1545,6 +1872,7 @@
             }
             persistData();
             renderNutritionSection();
+            renderReminder();
         }
 
         function resetMealsToday() {
@@ -1589,7 +1917,7 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between gap-2">
                                 <span class="text-xs font-bold text-emerald-500">${m.header}</span>
-                                <span class="font-mono font-bold text-xs text-slate-400">+${m.protein}g P</span>
+                                <span class="font-mono font-bold text-xs text-slate-400">+${m.protein}g P${m.kcal ? ' • ' + m.kcal + ' kcal' : ''}</span>
                             </div>
                             <p class="text-sm font-semibold mt-0.5 ${isDone ? 'line-through text-slate-400' : ''}">${menu}</p>
                             <p class="text-[11px] text-slate-400 mt-0.5">${m.tip}</p>
@@ -1618,11 +1946,19 @@
         // ============================================================
         // 8. WEEKLY CHECK-IN, COACHING LOGIC & SVG LINE CHART
         // ============================================================
+        function numOrNull(id) {
+            const v = parseFloat(document.getElementById(id).value);
+            return isNaN(v) ? null : v;
+        }
+
         function saveWeighInEntry() {
-            const dateVal = document.getElementById('input-checkin-date').value.trim() || new Date().toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            const dateVal = document.getElementById('input-checkin-date').value.trim() || new Date().toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
             const w = parseFloat(document.getElementById('input-checkin-weight').value);
-            const f = parseFloat(document.getElementById('input-checkin-fat').value);
-            const m = parseFloat(document.getElementById('input-checkin-muscle').value);
+            const f = numOrNull('input-checkin-fat');
+            const m = numOrNull('input-checkin-muscle');
+            const pr = numOrNull('input-checkin-protein');
+            const bmr = numOrNull('input-checkin-bmr');
+            const vis = numOrNull('input-checkin-visceral');
 
             if (isNaN(w) || w < 45 || w > 140) {
                 showToast('กรุณากรอกน้ำหนักที่ถูกต้องครับ');
@@ -1632,13 +1968,15 @@
             const prev = appData.weighIns[0];
             const prev2 = appData.weighIns[1];
             const wDiff = prev ? +(w - prev.weight).toFixed(2) : 0;
-            const mDiff = (prev && !isNaN(m)) ? +(m - prev.muscle).toFixed(2) : 0;
+            const mDiff = (prev && m !== null) ? +(m - prev.muscle).toFixed(2) : 0;
 
             let advice = '';
-            if (!isNaN(m) && mDiff < -0.3) {
+            if (m !== null && mDiff < -0.3) {
                 advice = `มวลกล้ามเนื้อลดลง ${Math.abs(mDiff)} kg (เกิน 0.3 kg) — กินน้อยไป แนะนำเพิ่มข้าว +50g/วัน ทันที`;
             } else if (wDiff <= -0.4 && wDiff >= -0.65) {
-                advice = `ลง ${Math.abs(wDiff)} kg อยู่ในเกณฑ์ดีมาก (0.4–0.6 kg/วีค) ทำตามแผนเดิมต่อไม่ต้องเปลี่ยนอะไร`;
+                advice = `ลง ${Math.abs(wDiff)} kg อยู่ในเกณฑ์ดีมาก (0.4–0.6 kg/วีค) ทำตามแผนเดิมต่อไปไม่ต้องเปลี่ยนอะไร`;
+            } else if (wDiff < -0.15 && wDiff > -0.4) {
+                advice = `ลง ${Math.abs(wDiff)} kg ช้ากว่าเกณฑ์ 0.4–0.6 แต่ยังลงอยู่ ไม่ได้นิ่ง — รออีก 1 วีค อย่าเพิ่งลดข้าว`;
             } else if (Math.abs(wDiff) <= 0.15) {
                 const stalledTwoWeeks = prev2 && Math.abs(prev.weight - prev2.weight) <= 0.15;
                 advice = stalledTwoWeeks
@@ -1653,8 +1991,9 @@
             appData.weighIns.unshift({
                 date: dateVal,
                 weight: w,
-                fat: isNaN(f) ? (prev ? prev.fat : 20.8) : f,
-                muscle: isNaN(m) ? (prev ? prev.muscle : 61.96) : m,
+                fat: f === null ? (prev ? prev.fat : 20.8) : f,
+                muscle: m === null ? (prev ? prev.muscle : 61.96) : m,
+                protein: pr, bmr: bmr, visceral: vis,
                 note: advice
             });
 
@@ -1663,9 +2002,9 @@
             fbBox.innerHTML = `<p class="font-bold text-emerald-500">คำแนะนำจากเกณฑ์ 7 วัน:</p><p>${advice}</p>`;
             fbBox.classList.remove('hidden');
 
-            document.getElementById('input-checkin-weight').value = '';
-            document.getElementById('input-checkin-fat').value = '';
-            document.getElementById('input-checkin-muscle').value = '';
+            ['weight', 'fat', 'muscle', 'protein', 'bmr', 'visceral'].forEach(k => {
+                document.getElementById('input-checkin-' + k).value = '';
+            });
 
             renderWeighInList();
             drawTrajectoryChart();
@@ -1684,16 +2023,102 @@
             showToast('ลบรายการชั่งน้ำหนักแล้ว');
         }
 
+        function sparkline(values, color) {
+            const vs = values.filter(v => typeof v === 'number');
+            if (vs.length < 2) return '';
+            const w = 100, h = 28, pad = 3;
+            const min = Math.min(...vs), max = Math.max(...vs);
+            const span = max - min || 1;
+            const pts = vs.map((v, i) => {
+                const x = pad + (i / (vs.length - 1)) * (w - pad * 2);
+                const y = h - pad - ((v - min) / span) * (h - pad * 2);
+                return [x, y];
+            });
+            const path = pts.map((p, i) => `${i ? 'L' : 'M'} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
+            const last = pts[pts.length - 1];
+            return `<svg viewBox="0 0 ${w} ${h}" class="w-full h-7"><path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.8" fill="${color}"/></svg>`;
+        }
+
+        function renderBodyComp() {
+            const box = document.getElementById('bodycomp-summary');
+            if (!box) return;
+            const logs = appData.weighIns;
+            const cur = logs[0], prev = logs[1], first = logs[logs.length - 1];
+            if (!cur) { box.innerHTML = ''; return; }
+            const chrono = [...logs].reverse();
+            const delta = (key, digits) => prev && typeof prev[key] === 'number' ? +(cur[key] - prev[key]).toFixed(digits) : null;
+            const stat = (label, key, unit, digits, goodWhenDown) => {
+                const d = delta(key, digits);
+                let dHtml = '<span class="text-[11px] text-slate-400">—</span>';
+                if (d !== null) {
+                    const good = d === 0 ? null : (goodWhenDown ? d < 0 : d > 0);
+                    const cls = good === null ? 'text-slate-400' : good ? 'text-emerald-500' : 'text-amber-500';
+                    dHtml = `<span class="text-[11px] font-mono font-bold ${cls}">${d > 0 ? '+' : ''}${d}${unit}</span>`;
+                }
+                const color = goodWhenDown === false ? '#06b6d4' : '#10b981';
+                return `
+                    <div class="sub-box rounded-xl p-3 space-y-1">
+                        <span class="text-[11px] text-slate-400 block">${label}</span>
+                        <span class="font-mono font-extrabold text-lg block">${Number(cur[key]).toFixed(digits)}<span class="text-[11px] font-normal text-slate-400">${unit}</span></span>
+                        ${dHtml}
+                        ${sparkline(chrono.map(l => l[key]), color)}
+                    </div>`;
+            };
+
+            const totalDown = first ? +(first.weight - cur.weight).toFixed(2) : 0;
+            const toGoal = Math.max(0, +(cur.weight - 76.8).toFixed(1));
+            const goalPct = Math.max(0, Math.min(100, Math.round((totalDown / 5.6) * 100)));
+            const wd = delta('weight', 2);
+            let verdict = 'มีข้อมูลรอบเดียว รอเช็กอินรอบถัดไปเพื่อดูแนวโน้ม';
+            if (wd !== null) {
+                verdict = wd <= -0.15 ? `7 วันที่ผ่านมาลง ${Math.abs(wd)} kg — ลงอยู่ ไม่ได้นิ่ง`
+                    : wd >= 0.15 ? `7 วันที่ผ่านมาขึ้น ${wd} kg — เช็กโซเดียม/น้ำ/การนอน`
+                    : '7 วันที่ผ่านมาน้ำหนักทรงตัว';
+            }
+
+            const extras = [];
+            if (typeof cur.protein === 'number') extras.push(`โปรตีน ${cur.protein} kg`);
+            if (typeof cur.bmr === 'number') extras.push(`BMR ${cur.bmr.toLocaleString()} kcal`);
+            if (typeof cur.visceral === 'number') extras.push(`ไขมันช่องท้อง ${cur.visceral}`);
+
+            box.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="font-bold text-base">Body Composition</h2>
+                        <p class="text-xs text-slate-400">ล่าสุด ${cur.date} จากเครื่องชั่ง Arboleaf</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-500 font-mono font-bold text-xs">รวมลง ${totalDown} kg</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    ${stat('น้ำหนัก', 'weight', ' kg', 2, true)}
+                    ${stat('ไขมัน', 'fat', '%', 1, true)}
+                    ${stat('กล้ามเนื้อ', 'muscle', ' kg', 2, false)}
+                </div>
+                <div class="rounded-xl p-3 bg-emerald-500/12 border border-emerald-500/30 text-xs font-semibold">${verdict}</div>
+                <div>
+                    <div class="flex justify-between text-[11px] text-slate-400 mb-1"><span>ความคืบหน้าสู่ 76.8 kg</span><span class="font-mono">${goalPct}% • เหลือ ${toGoal} kg</span></div>
+                    <div class="w-full h-2 rounded-full sub-box overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width:${goalPct}%"></div></div>
+                </div>
+                <p class="text-[11px] text-slate-400">${extras.length ? extras.join(' • ') : 'ยังไม่ได้กรอก โปรตีน (kg) / BMR / ไขมันช่องท้อง — กรอกได้ในฟอร์มด้านล่าง'}</p>
+            `;
+        }
+
         function renderWeighInList() {
             const latest = appData.weighIns[0];
             if (latest) {
-                document.getElementById('header-goal-line').textContent = `${latest.weight.toFixed(1)} → 76.8 kg (-5.6 kg)`;
+                document.getElementById('header-goal-line').textContent = `${latest.weight.toFixed(1)} → 76.8 kg (-${Math.max(0, latest.weight - 76.8).toFixed(1)} kg)`;
                 document.getElementById('current-weight-pill').textContent = `${latest.weight.toFixed(1)} kg`;
                 const rem = Math.max(0, +(latest.weight - 76.8).toFixed(1));
                 document.getElementById('kg-left-badge').textContent = rem.toFixed(1);
             }
+            renderBodyComp();
 
-            document.getElementById('weighin-history-container').innerHTML = appData.weighIns.map((item, idx) => `
+            document.getElementById('weighin-history-container').innerHTML = appData.weighIns.map((item, idx) => {
+                const ex = [];
+                if (typeof item.protein === 'number') ex.push(`โปรตีน ${item.protein} kg`);
+                if (typeof item.bmr === 'number') ex.push(`BMR ${item.bmr}`);
+                if (typeof item.visceral === 'number') ex.push(`ไขมันช่องท้อง ${item.visceral}`);
+                return `
                 <div class="sub-box rounded-xl p-3 flex items-center justify-between gap-2">
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center gap-2">
@@ -1701,6 +2126,7 @@
                             ${idx === 0 ? '<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-500 text-[10px] font-bold">ล่าสุด</span>' : ''}
                         </div>
                         <p class="text-[11px] text-slate-400 mt-0.5">${item.note}</p>
+                        ${ex.length ? `<p class="text-[11px] text-cyan-500 mt-0.5">${ex.join(' | ')}</p>` : ''}
                     </div>
                     <div class="text-right font-mono flex-shrink-0 flex items-center gap-2">
                         <div>
@@ -1713,8 +2139,8 @@
                             </button>
                         ` : ''}
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
         }
 
         function drawTrajectoryChart() {
@@ -1874,7 +2300,7 @@
             document.getElementById('current-date-label').textContent = now.toLocaleDateString('th-TH', {
                 weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'
             });
-            document.getElementById('input-checkin-date').value = now.toLocaleDateString('th-TH', {
+            document.getElementById('input-checkin-date').value = now.toLocaleDateString('en-GB', {
                 day: '2-digit', month: '2-digit', year: 'numeric'
             });
 
@@ -1885,7 +2311,9 @@
             renderActivityRings();
             renderDaySelector();
             renderWorkoutExercises();
-            switchMacroDay(workoutPlan[activeDayIndex].type === 'weight' ? 'train' : 'rest', false);
+            switchMacroDay(sessionMacroMode(), false);
+            renderReminder();
+            setInterval(renderReminder, 60000);
             renderTreadmillCoach();
             renderWeighInList();
             drawTrajectoryChart();
