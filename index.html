@@ -575,10 +575,15 @@
                     <span id="food-day-total" class="px-2.5 py-1 rounded-lg sub-box font-mono font-bold text-[11px] flex-shrink-0">0 kcal</span>
                 </div>
 
+                <div class="grid grid-cols-2 gap-1 p-1 rounded-xl sub-box">
+                    <button onclick="setProvider('gemini')" id="prov-gemini" class="py-2 rounded-lg text-xs font-bold transition">Gemini (ฟรี)</button>
+                    <button onclick="setProvider('claude')" id="prov-claude" class="py-2 rounded-lg text-xs font-bold transition">Claude (เสียเงิน)</button>
+                </div>
+
                 <div id="food-key-box" class="space-y-2 hidden">
-                    <p class="text-[11px] text-slate-400">ใส่ Claude API key ของ Edward (เก็บในเครื่องนี้เท่านั้น ไม่รวมในไฟล์สำรอง) รูปจะถูกส่งไป api.anthropic.com โดยตรงและคิดค่าใช้จ่ายตามการใช้งานของ key นั้น</p>
+                    <p id="food-key-hint" class="text-[11px] text-slate-400"></p>
                     <div class="flex gap-2">
-                        <input type="password" id="food-api-key" placeholder="sk-ant-..." autocomplete="off" class="flex-1 min-w-0 px-3 py-2.5 rounded-xl sub-box font-mono text-xs focus:outline-none focus:border-emerald-500">
+                        <input type="password" id="food-api-key" autocomplete="off" class="flex-1 min-w-0 px-3 py-2.5 rounded-xl sub-box font-mono text-xs focus:outline-none focus:border-emerald-500">
                         <button onclick="saveAiKey()" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold">บันทึก</button>
                     </div>
                 </div>
@@ -1982,22 +1987,41 @@
         // ============================================================
         // 7b. FOOD PHOTO ANALYSIS (Claude API, key เก็บในเครื่อง)
         // ============================================================
-        const AI_KEY_STORE = 'edward_ai_key';
-        const AI_MODEL = 'claude-sonnet-5-5';
+        const AI_PROVIDERS = {
+            gemini: {
+                label: 'Gemini', prefix: 'AIza', store: 'edward_ai_key_gemini', ph: 'AIza...',
+                models: ['gemini-2.5-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite'],
+                hint: 'ใช้ฟรี: ขอ key ที่ aistudio.google.com/apikey (ล็อกอินบัญชี Google ไม่ต้องผูกบัตร) แล้ววางที่นี่ เก็บในเครื่องนี้เท่านั้น ข้อควรรู้: ในแพ็กฟรี Google อาจนำข้อมูลไปปรับปรุงผลิตภัณฑ์ จึงไม่ควรถ่ายรูปที่เห็นใบหน้าหรือข้อมูลส่วนตัว และมีโควตาต่อวันจำกัด'
+            },
+            claude: {
+                label: 'Claude', prefix: 'sk-ant-', store: 'edward_ai_key', ph: 'sk-ant-...', model: 'claude-sonnet-5-5',
+                hint: 'ใส่ Claude API key (เสียเงินตามการใช้งาน) เก็บในเครื่องนี้เท่านั้น ไม่รวมในไฟล์สำรอง รูปส่งตรงไป api.anthropic.com'
+            }
+        };
         let foodImgB64 = null;
         let foodResult = null;
 
-        function getAiKey() { try { return localStorage.getItem(AI_KEY_STORE) || ''; } catch (e) { return ''; } }
+        function getProvider() {
+            try { const p = localStorage.getItem('edward_ai_provider'); return AI_PROVIDERS[p] ? p : 'gemini'; } catch (e) { return 'gemini'; }
+        }
+        function setProvider(p) {
+            try { localStorage.setItem('edward_ai_provider', p); } catch (e) {}
+            renderFoodAI();
+        }
+        function getAiKey() {
+            try { return localStorage.getItem(AI_PROVIDERS[getProvider()].store) || ''; } catch (e) { return ''; }
+        }
         function saveAiKey() {
+            const pv = AI_PROVIDERS[getProvider()];
             const v = document.getElementById('food-api-key').value.trim();
-            if (!v.startsWith('sk-ant-')) { showToast('API key ไม่ถูกต้อง ต้องขึ้นต้นด้วย sk-ant-'); return; }
-            try { localStorage.setItem(AI_KEY_STORE, v); } catch (e) { showToast('บันทึก key ในเครื่องนี้ไม่ได้'); return; }
+            if (!v.startsWith(pv.prefix)) { showToast(`key ของ ${pv.label} ต้องขึ้นต้นด้วย ${pv.prefix}`); return; }
+            try { localStorage.setItem(pv.store, v); } catch (e) { showToast('บันทึก key ในเครื่องนี้ไม่ได้'); return; }
             document.getElementById('food-api-key').value = '';
             renderFoodAI();
             showToast('บันทึก API key แล้ว');
         }
         function clearAiKey() {
-            try { localStorage.removeItem(AI_KEY_STORE); } catch (e) {}
+            try { localStorage.removeItem(AI_PROVIDERS[getProvider()].store); } catch (e) {}
             renderFoodAI();
             showToast('ลบ API key ออกจากเครื่องแล้ว');
         }
@@ -2007,6 +2031,13 @@
         function num(v) { const n = Math.round(Number(v)); return isNaN(n) ? 0 : n; }
 
         function renderFoodAI() {
+            const prov = getProvider();
+            const pv = AI_PROVIDERS[prov];
+            ['gemini', 'claude'].forEach(k => {
+                document.getElementById('prov-' + k).className = 'py-2 rounded-lg text-xs font-bold transition ' + (k === prov ? 'bg-emerald-600 text-white' : 'text-slate-500 dark:text-slate-400');
+            });
+            document.getElementById('food-key-hint').textContent = pv.hint;
+            document.getElementById('food-api-key').placeholder = pv.ph;
             const has = !!getAiKey();
             document.getElementById('food-key-box').classList.toggle('hidden', has);
             document.getElementById('food-main-box').classList.toggle('hidden', !has);
@@ -2065,6 +2096,64 @@
                 + (note ? ' หมายเหตุจากผู้ใช้: ' + note : '');
         }
 
+        async function callClaude(key, prompt, signal) {
+            const res = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                signal,
+                headers: {
+                    'content-type': 'application/json',
+                    'x-api-key': key,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
+                body: JSON.stringify({
+                    model: AI_PROVIDERS.claude.model,
+                    max_tokens: 1200,
+                    messages: [{ role: 'user', content: [
+                        { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: foodImgB64 } },
+                        { type: 'text', text: prompt }
+                    ] }]
+                })
+            });
+            if (res.status === 401) throw new Error('API key ไม่ถูกต้องหรือหมดอายุ');
+            if (res.status === 429) throw new Error('เรียกใช้ถี่เกินไป รอสักครู่แล้วลองใหม่');
+            if (!res.ok) throw new Error('เรียก AI ไม่สำเร็จ (รหัส ' + res.status + ')');
+            const data = await res.json();
+            return (data.content || []).map(b => b.text || '').join('');
+        }
+
+        async function callGemini(key, prompt, signal) {
+            for (const model of AI_PROVIDERS.gemini.models) {
+                const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
+                    method: 'POST',
+                    signal,
+                    headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
+                    body: JSON.stringify({
+                        contents: [{ parts: [
+                            { inline_data: { mime_type: 'image/jpeg', data: foodImgB64 } },
+                            { text: prompt }
+                        ] }],
+                        generationConfig: { responseMimeType: 'application/json', temperature: 0.2 }
+                    })
+                });
+                if (res.status === 404) continue; // โมเดลนี้เลิกให้บริการแล้ว ลองตัวถัดไป
+                if (res.status === 429) throw new Error('โควตาฟรีหมดชั่วคราว ลองใหม่อีกครั้งภายหลัง');
+                if (res.status === 400 || res.status === 401 || res.status === 403) {
+                    let msg = '';
+                    try { msg = ((await res.json()).error || {}).message || ''; } catch (e) {}
+                    if (res.status !== 400 || /api key/i.test(msg)) throw new Error('API key ไม่ถูกต้องหรือไม่มีสิทธิ์ใช้งาน');
+                    throw new Error('เรียก AI ไม่สำเร็จ (รหัส 400)');
+                }
+                if (!res.ok) throw new Error('เรียก AI ไม่สำเร็จ (รหัส ' + res.status + ')');
+                const data = await res.json();
+                const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
+                const text = parts.map(p => p.text || '').join('');
+                if (!text) throw new Error('AI ไม่ตอบ (รูปอาจถูกกรอง) ลองถ่ายรูปใหม่');
+                return text;
+            }
+            throw new Error('โมเดล Gemini ที่ใช้ไม่พร้อมใช้งานตอนนี้');
+        }
+
         async function analyzeFood() {
             const key = getAiKey();
             if (!key || !foodImgB64) return;
@@ -2076,29 +2165,10 @@
             const ctl = new AbortController();
             const timer = setTimeout(() => ctl.abort(), 60000);
             try {
-                const res = await fetch('https://api.anthropic.com/v1/messages', {
-                    method: 'POST',
-                    signal: ctl.signal,
-                    headers: {
-                        'content-type': 'application/json',
-                        'x-api-key': key,
-                        'anthropic-version': '2023-06-01',
-                        'anthropic-dangerous-direct-browser-access': 'true'
-                    },
-                    body: JSON.stringify({
-                        model: AI_MODEL,
-                        max_tokens: 1200,
-                        messages: [{ role: 'user', content: [
-                            { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: foodImgB64 } },
-                            { type: 'text', text: foodPrompt(document.getElementById('food-note').value.trim()) }
-                        ] }]
-                    })
-                });
-                if (res.status === 401) throw new Error('API key ไม่ถูกต้องหรือหมดอายุ');
-                if (res.status === 429) throw new Error('เรียกใช้ถี่เกินไป รอสักครู่แล้วลองใหม่');
-                if (!res.ok) throw new Error('เรียก AI ไม่สำเร็จ (รหัส ' + res.status + ')');
-                const data = await res.json();
-                const text = (data.content || []).map(b => b.text || '').join('');
+                const prompt = foodPrompt(document.getElementById('food-note').value.trim());
+                const text = getProvider() === 'claude'
+                    ? await callClaude(key, prompt, ctl.signal)
+                    : await callGemini(key, prompt, ctl.signal);
                 const m = text.match(/\{[\s\S]*\}/);
                 if (!m) throw new Error('อ่านผลวิเคราะห์ไม่ได้ ลองถ่ายรูปใหม่');
                 const out = JSON.parse(m[0]);
